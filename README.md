@@ -120,53 +120,7 @@ Composition has multiple advantages over `switch` statement:
 
 ### Loading Content
 
-Common task is loading content from network or persistent store. Lets see how we can implement content loading in `TableViewDataSource`. We start with extending data source functionality by overriding `loadContent` method:
-
-```swift
-class AnimalsDataSource: TableViewDataSource {
-    
-    // ...
-
-    private var animals: [String] = []
-
-    override func loadContent() {
-        DispatchQueue.global().async { // Perform loading in background.
-            let animals = [ "Cheetah", "Puma", "Jaguar" ]
-            
-            DispatchQueue.main.async { // Perform update on main queue.
-                self.animals = animals
-                self.notify(update: TableViewUpdate.reloadData()) // Ask table view to reload.
-            }
-        }
-    }
-}
-```
-
-View controller should trigger `loadContent` at appropriate moment and confirm to `UpdateObserver` protocol in order to handle view update requests.
-
-```swift
-class TableViewController: UIViewController, UpdateObserver {
-    
-    // ...
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // ...
-
-        dataSource.updateObserver = self // Listen to update notifications.
-        dataSource.loadContent() // Trigger content loading.
-
-        // ...
-    }
-    
-    func perform(update: Update, from sender: UpdateObservable) {
-        // Update object incapsulates logic of performing changes.
-        // All it needs is a view to update.
-        update.perform(tableView)
-    }
-}
-```
+TBD
 
 ## License
 
