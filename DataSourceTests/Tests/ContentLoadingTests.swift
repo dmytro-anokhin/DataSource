@@ -10,7 +10,7 @@ import XCTest
 @testable import DataSource
 
 
-class ContentLoadingTestDataSource : TableViewDataSource {
+class ContentLoadingTestDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
 
     let cellReuseIdentifier = "Identifier"
 
@@ -32,7 +32,7 @@ class ContentLoadingTestDataSource : TableViewDataSource {
         return tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
     }
     
-    override func registerReusableViews(with tableView: UITableView) {
+    func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
     

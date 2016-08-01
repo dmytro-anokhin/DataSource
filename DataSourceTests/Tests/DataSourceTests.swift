@@ -10,7 +10,7 @@ import XCTest
 @testable import DataSource
 
 
-class TestDataSource : TableViewDataSource {
+class TestDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
 
     let cellReuseIdentifier = "Identifier"
 
@@ -36,7 +36,7 @@ class TestDataSource : TableViewDataSource {
         return tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
     }
     
-    override func registerReusableViews(with tableView: UITableView) {
+    func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
 }

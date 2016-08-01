@@ -6,8 +6,8 @@
 //
 
 
-public class TableViewDataSource: NSObject, TableViewDataSourceType, TableViewReusableViewsRegistering,
-    UpdateObservable, ContentLoading, ContentLoadingControllerDelegate {
+public class TableViewDataSource: NSObject, TableViewDataSourceType, UpdateObservable,
+    ContentLoading, ContentLoadingControllerDelegate {
 
     // MARK: - Public
     
@@ -28,21 +28,6 @@ public class TableViewDataSource: NSObject, TableViewDataSourceType, TableViewRe
         return 1
     }
 
-    // MARK: - Data Source
-
-    public func object(at indexPath: IndexPath) -> Any? {
-        return nil
-    }
-    
-    public func indexPaths(for object: Any) -> [IndexPath] {
-        return []
-    }
-    
-    // MARK: - TableViewReusableViewsRegistering
-    
-    public func registerReusableViews(with tableView: UITableView) {
-    }
-    
     // MARK: - ContentLoading
     
     public var loadingState: ContentLoadingState {

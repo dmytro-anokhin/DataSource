@@ -7,43 +7,12 @@
 
 
 public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, TableViewDataSourceType,
-    TableViewReusableViewsRegistering, ContentLoading, UpdateObserver, UpdateObservable, ContentLoadingObserver, ContentLoadingObservable {
-
-    public typealias ChildDataSource = TableViewDataSourceType
-
-    // MARK: - TableViewDataSourceType
-
-    private var _numberOfSections: Int = 0
-    
-    public var numberOfSections: Int {
-        updateMappings()
-        return _numberOfSections
-    }
-    
-    // MARK: - DataSourceType
-    
-    public func object(at indexPath: IndexPath) -> Any? {
-        
-        guard let mapping = self.mapping(for: indexPath.section),
-              let localIndexPath = mapping.localIndexPath(for: indexPath)
-        else {
-            return nil
-        }
-        
-        return mapping.dataSource.object(at: localIndexPath)
-    }
-    
-    public func indexPaths(for object: Any) -> [IndexPath] {
-        
-        return dataSources.reduce([]) { indexPaths, dataSource in
-            let mapping = self.mapping(for: dataSource)
-            let localIndexPaths = dataSource.indexPaths(for: object)
-            
-            return indexPaths + localIndexPaths.flatMap { mapping.globalIndexPath(for: $0) }
-        }
-    }
+    IndexPathIndexable, TableViewReusableViewsRegistering, ContentLoading,
+    UpdateObserver, UpdateObservable, ContentLoadingObserver, ContentLoadingObservable {
     
     // MARK: - ComposedDataSourceType
+
+    public typealias ChildDataSource = TableViewDataSourceType
 
     @discardableResult
     public func add(dataSource: ChildDataSource, animated: Bool) -> Bool {
@@ -98,6 +67,38 @@ public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, Tabl
     
     public var dataSources: [ChildDataSource] {
         return mappings.map { $0.dataSource }
+    }
+    
+    // MARK: - TableViewDataSourceType
+
+    private var _numberOfSections: Int = 0
+    
+    public var numberOfSections: Int {
+        updateMappings()
+        return _numberOfSections
+    }
+    
+    // MARK: - IndexPathIndexable
+    
+    public func object(at indexPath: IndexPath) -> Any? {
+        
+        guard let mapping = self.mapping(for: indexPath.section),
+              let localIndexPath = mapping.localIndexPath(for: indexPath)
+        else {
+            return nil
+        }
+        
+        return (mapping.dataSource as? IndexPathIndexable)?.object(at: localIndexPath)
+    }
+    
+    public func indexPaths(for object: Any) -> [IndexPath] {
+        
+        return dataSources.reduce([]) { indexPaths, dataSource in
+            let mapping = self.mapping(for: dataSource)
+            let localIndexPaths = (mapping.dataSource as? IndexPathIndexable)?.indexPaths(for: object) ?? []
+            
+            return indexPaths + localIndexPaths.flatMap { mapping.globalIndexPath(for: $0) }
+        }
     }
     
     // MARK: - ContentLoading

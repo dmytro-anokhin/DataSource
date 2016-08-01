@@ -7,7 +7,7 @@
 //
 
 
-public protocol ContentLoadingControllerDelegate: class {
+public protocol ContentLoadingControllerDelegate : class {
 
     func contentLoadingControllerWillBeginLoading(_ controller: ContentLoadingController)
     
@@ -21,13 +21,9 @@ public class ContentLoadingController {
 
     weak var delegate: ContentLoadingControllerDelegate?
     
-    public var currentLoadingHelper: ContentLoadingHelper?
-
-    public private(set) var loadingStateMachine: ContentLoadingStateMachine?
-    
     public var loadingState: ContentLoadingState {
-        if  let loadingStateMachine = loadingStateMachine {
-            return loadingStateMachine.currentState
+        if let stateMachine = stateMachine {
+            return stateMachine.currentState
         }
         
         return .initial
@@ -42,7 +38,8 @@ public class ContentLoadingController {
         // Begin loading
         beginLoading()
         
-        let loadingHelper = ContentLoadingHelper { state, error, update in
+        // Replace current loading helper with new one
+        currentLoadingHelper = ContentLoadingHelper { state, error, update in
             guard let state = state else { return } // Ignore
 
             self.endLoading(state, error: error) {
@@ -50,28 +47,26 @@ public class ContentLoadingController {
             }
         }
         
-        // Tell previous loading helper it's no longer current and remember this loading helper
-        currentLoadingHelper?.current = false
-        currentLoadingHelper = loadingHelper
-        
-        // Call the provided closure to actually do the load
-        closure(helper: loadingHelper)
+        // Execute loading closure
+        closure(helper: currentLoadingHelper!)
     }
     
     // MARK: - Private
     
+    private var stateMachine: ContentLoadingStateMachine?
+    
+    private var currentLoadingHelper: ContentLoadingHelper? {
+        willSet {
+            currentLoadingHelper?.current = false
+        }
+    }
+
     private func updateLoadingState(_ state: ContentLoadingState) {
-        if nil == loadingStateMachine {
-            loadingStateMachine = ContentLoadingStateMachine()
+        if nil == stateMachine {
+            stateMachine = ContentLoadingStateMachine()
         }
         
-        guard let loadingStateMachine = loadingStateMachine,
-            loadingStateMachine.currentState != state
-        else {
-            return
-        }
-        
-        loadingStateMachine.currentState = state
+        stateMachine?.currentState = state
     }
     
     private func beginLoading() {

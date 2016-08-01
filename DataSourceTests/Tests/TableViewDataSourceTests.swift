@@ -10,7 +10,7 @@ import XCTest
 @testable import DataSource
 
 
-class EventsDataSource : TableViewDataSource {
+class EventsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
     
     let cellReuseIdentifier = "EventCell"
     
@@ -22,7 +22,7 @@ class EventsDataSource : TableViewDataSource {
     
     var fileName = "Events"
         
-    override func registerReusableViews(with tableView: UITableView) {
+    func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
 
@@ -84,7 +84,7 @@ class EventsDataSource : TableViewDataSource {
 }
 
 
-class ShopsDataSource : TableViewDataSource {
+class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
     
     let cellReuseIdentifier = "ShopCell"
     
@@ -96,7 +96,7 @@ class ShopsDataSource : TableViewDataSource {
     
     var fileName = "Shops"
     
-    override func registerReusableViews(with tableView: UITableView) {
+    func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
 
