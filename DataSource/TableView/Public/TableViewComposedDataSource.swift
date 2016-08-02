@@ -338,8 +338,8 @@ public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, Tabl
     private var mappings: [ComposedTableViewMapping] = []
     
     // TODO: Figure out how to specify ChildDataSource in generic
-    private var dataSourceToMappings = MapTable<AnyObject, ComposedTableViewMapping>(
-        keyOptions: .objectPointerPersonality, valueOptions: PointerFunctions.Options(), capacity: 1)
+    private var dataSourceToMappings = NSMapTable<AnyObject, ComposedTableViewMapping>(
+        keyOptions: .objectPointerPersonality, valueOptions: NSPointerFunctions.Options(), capacity: 1)
 
     private var globalSectionToMappings: [Int: ComposedTableViewMapping] = [:]
     

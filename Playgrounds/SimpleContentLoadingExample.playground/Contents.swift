@@ -7,7 +7,7 @@ import DataSource
 
 class AnimalsDataSource: TableViewDataSource {
 
-    override func registerReusableViews(with tableView: UITableView) {
+    func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AnimalCell")
     }
 

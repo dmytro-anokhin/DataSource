@@ -13,7 +13,7 @@ public class ContentLoadingStateMachine {
     
     public var didTransition: ((from: ContentLoadingState) -> Void)?
     
-    public enum Error: ErrorProtocol {
+    public enum Error: Swift.Error {
         case illegalStateTransition(from: ContentLoadingState, to: ContentLoadingState)
     }
 
@@ -46,7 +46,7 @@ public class ContentLoadingStateMachine {
         ]
     ]
 
-    private let lock = Lock()
+    private let lock = NSLock()
     
     private var _currentState: ContentLoadingState = .initial
     

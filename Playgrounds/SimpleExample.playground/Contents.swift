@@ -9,7 +9,7 @@ class AnimalsDataSource: TableViewDataSource {
 
     private var animals = [ "Cheetah", "Puma", "Jaguar" ]
 
-    override func registerReusableViews(with tableView: UITableView) {
+    func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AnimalCell")
     }
 

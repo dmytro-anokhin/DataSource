@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol IndexPathIndexable {
+public protocol IndexPathIndexable {
 
     /// Returns object at specific index path.
     func object(at indexPath: IndexPath) -> Any?

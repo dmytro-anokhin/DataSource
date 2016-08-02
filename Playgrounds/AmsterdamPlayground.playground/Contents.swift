@@ -79,17 +79,17 @@ class HeaderDataSource: TableViewDataSource {
 }
 
 
-class FestivalsDataSource: TableViewDataSource {
+class FestivalsDataSource: TableViewDataSource, TableViewReusableViewsRegistering, IndexPathIndexable {
 
     static let cellReuseIdentifier = "FestivalsDataSourceCell"
 
     private(set) var festivals: [Festival] = []
 
-    override func object(at indexPath: IndexPath) -> Any? {
+    func object(at indexPath: IndexPath) -> Any? {
         return indexPath.row < festivals.count ? festivals[indexPath.row] : nil
     }
     
-    override func indexPaths(for object: Any) -> [IndexPath] {
+    func indexPaths(for object: Any) -> [IndexPath] {
         guard let festival = object as? Festival, let index = festivals.index(where: { element in
             return element == festival
         })
@@ -154,7 +154,7 @@ class FestivalsDataSource: TableViewDataSource {
         }
     }
     
-    override func registerReusableViews(with tableView: UITableView) {
+    func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: FestivalsDataSource.cellReuseIdentifier)
     }
     

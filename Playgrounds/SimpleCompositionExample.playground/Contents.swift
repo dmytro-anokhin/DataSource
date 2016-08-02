@@ -5,9 +5,9 @@ import PlaygroundSupport
 import DataSource
 
 
-class AnimalsDataSource: TableViewDataSource {
+class AnimalsDataSource: TableViewDataSource, TableViewReusableViewsRegistering {
 
-    override func registerReusableViews(with tableView: UITableView) {
+    func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AnimalCell")
     }
 
@@ -25,9 +25,9 @@ class AnimalsDataSource: TableViewDataSource {
 }
 
 
-class InsectsDataSource: TableViewDataSource {
+class InsectsDataSource: TableViewDataSource, TableViewReusableViewsRegistering {
 
-    override func registerReusableViews(with tableView: UITableView) {
+    func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "InsectCell")
     }
 

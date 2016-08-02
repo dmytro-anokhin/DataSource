@@ -73,7 +73,6 @@
 		F47093681D46001D00BE7525 /* DataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
 		F47093691D46001D00BE7525 /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
 		F47093701D46002800BE7525 /* ContentLoadingStateMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingStateMachineTests.swift; sourceTree = "<group>"; };
-		F47D43A21D4F93B30064885E /* Various.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Various.playground; sourceTree = "<group>"; };
 		F47D43A31D4F96F20064885E /* IndexPathIndexable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexPathIndexable.swift; sourceTree = "<group>"; };
 		F4B416F61D3E1F67005E8BFC /* MemoryWarningHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWarningHandling.swift; sourceTree = "<group>"; };
 		F4B416FA1D3E5D4A005E8BFC /* TableViewDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceType.swift; sourceTree = "<group>"; };
@@ -116,7 +115,6 @@
 				F440A1C51D4E21E600534A3C /* SimpleCompositionExample.playground */,
 				F40C9C8C1D48A2BD00457C1E /* StaticCellsPlayground.playground */,
 				F4CD27B61D4B4B9200C24E04 /* AmsterdamPlayground.playground */,
-				F47D43A21D4F93B30064885E /* Various.playground */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";

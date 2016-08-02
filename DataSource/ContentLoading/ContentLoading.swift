@@ -102,8 +102,7 @@ public class ContentLoadingHelper {
 
 //    private var lock = NSLock()
 
-    private let queue = DispatchQueue(label: "DataSource.ContentLoadingHelper.serializationQueue",
-        attributes: .serial)
+    private let queue = DispatchQueue(label: "DataSource.ContentLoadingHelper.serializationQueue")
 
     private func doneWithNewState(_ state: ContentLoadingState?, error: NSError?, update: UpdateHandler?) {
         
