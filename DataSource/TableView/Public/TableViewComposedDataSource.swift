@@ -10,10 +10,6 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
     IndexPathIndexable, TableViewReusableViewsRegistering, ContentLoading,
     UpdateObserver, UpdateObservable, ContentLoadingObserver, ContentLoadingObservable {
     
-    deinit {
-        print("deinit \(self)")
-    }
-    
     // MARK: - ComposedDataSourceType
 
     public typealias Child = TableViewDataSourceType
@@ -35,7 +31,7 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
         mappings.append(mapping)
         dataSourceToMappings.setObject(mapping, forKey: dataSource)
         
-        updateMappings()
+        _numberOfSections = updateMappings()
         
         let sections = self.sections(for: dataSource)
         notify(update: TableViewUpdate.insertSections(sections))
@@ -63,7 +59,7 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
         (dataSource as? UpdateObservable)?.updateObserver = nil
         (dataSource as? ContentLoadingObservable)?.contentLoadingObserver = nil
         
-        updateMappings()
+        _numberOfSections = updateMappings()
         notify(update: TableViewUpdate.deleteSections(sections))
         
         return true
@@ -78,7 +74,7 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
     private var _numberOfSections: Int = 0
     
     public var numberOfSections: Int {
-        updateMappings()
+        _numberOfSections = updateMappings()
         return _numberOfSections
     }
     
@@ -141,13 +137,13 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
         guard let dataSource = sender as? TableViewDataSourceType else { return }
         
         if let _ = update as? TableViewBatchUpdate {
-            updateMappings()
+            _numberOfSections = updateMappings()
             notify(update: update)
             return
         }
         
         if let _ = update as? TableViewReloadDataUpdate {
-            updateMappings()
+            _numberOfSections = updateMappings()
             notify(update: update)
             return
         }
@@ -175,13 +171,13 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
                 
                 switch structureUpdate.type {
                     case .insert:
-                        updateMappings()
+                        _numberOfSections = updateMappings()
                         // Map local sections to global after mappings update
                         return globalSections(for: sections, in: dataSource)
                     case .delete:
                         // Map local sections to global before mappings update
                         let globalSections = self.globalSections(for: sections, in: dataSource)
-                        updateMappings()
+                        _numberOfSections = updateMappings()
                         return globalSections
                     case .reload:
                         // Map local sections to global without mappings update
@@ -193,7 +189,7 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
             }(),
             newSections: {
                 guard let newSections = structureUpdate.newSections else { return nil }
-                updateMappings()
+                _numberOfSections = updateMappings()
                 let globalNewSection = mapping.globalSections(for: newSections)
                 
                 return globalNewSection
@@ -248,7 +244,7 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-        updateMappings()
+        _numberOfSections = updateMappings()
     
         guard let mapping = self.mapping(for: section) else {
             fatalError("Mapping for section not found: \(section)")
@@ -297,17 +293,20 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
 
     private var globalSectionToMappings: [Int: ComposedTableViewMapping] = [:]
     
-    private func updateMappings() {
-        _numberOfSections = 0
+    /// Updates map of table view sections to data sources. Returns number of global sections.
+    private func updateMappings() -> Int {
+        var numberOfSections = 0
         globalSectionToMappings.removeAll()
         
         for mapping in mappings {
-            let newNumberOfSections = mapping.updateMappings(startingWith: _numberOfSections)
-            while _numberOfSections < newNumberOfSections {
-                globalSectionToMappings[_numberOfSections] = mapping
-                _numberOfSections += 1
+            let newNumberOfSections = mapping.updateMappings(startingWith: numberOfSections)
+            while numberOfSections < newNumberOfSections {
+                globalSectionToMappings[numberOfSections] = mapping
+                numberOfSections += 1
             }
         }
+        
+        return numberOfSections
     }
 
     private func sections(for dataSource: Child) -> IndexSet {

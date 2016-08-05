@@ -9,10 +9,6 @@
 public class TableViewDataSource: NSObject, TableViewDataSourceType, UpdateObservable,
     ContentLoading, ContentLoadingControllerDelegate {
 
-    deinit {
-        print("deinit \(self)")
-    }
-
     // MARK: - Public
     
     private var _contentLoadingController: ContentLoadingController?
