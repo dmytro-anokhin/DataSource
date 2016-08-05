@@ -80,8 +80,8 @@ class ContentLoadingTests: XCTestCase {
         let dataSource1 = ContentLoadingTestDataSource(sections: [])
         let dataSource2 = ContentLoadingTestDataSource(sections: [])
         
-        composedDataSource.add(dataSource: dataSource1, animated: false)
-        composedDataSource.add(dataSource: dataSource2, animated: false)
+        composedDataSource.add(dataSource1)
+        composedDataSource.add(dataSource2)
         
         let contentLoadedExpectation = expectation(description: "contentLoadedExpectation")
         

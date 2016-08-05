@@ -78,10 +78,10 @@ class DataSourceTests: XCTestCase {
         let composedDataSource = TableViewComposedDataSource()
         
         let dataSource1 = TestDataSource(sections: [ 1, 2 ])
-        composedDataSource.add(dataSource: dataSource1, animated: false)
+        composedDataSource.add(dataSource1)
         
         let dataSource2 = TestDataSource(sections: [ 3, 4 ])
-        composedDataSource.add(dataSource: dataSource2, animated: false)
+        composedDataSource.add(dataSource2)
         
         composedDataSource.registerReusableViews(with: tableView)
         
@@ -99,10 +99,10 @@ class DataSourceTests: XCTestCase {
         let composedDataSource = TableViewComposedDataSource()
         
         let dataSource1 = TestDataSource(sections: [ 1, 2 ])
-        composedDataSource.add(dataSource: dataSource1, animated: false)
+        composedDataSource.add(dataSource1)
         
         let dataSource2 = TestDataSource(sections: [ 3, 4 ])
-        composedDataSource.add(dataSource: dataSource2, animated: false)
+        composedDataSource.add(dataSource2)
         
         let reloadDataExpectation = expectation(description: "reloadData")
         

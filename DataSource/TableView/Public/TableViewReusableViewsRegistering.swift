@@ -15,11 +15,10 @@ public protocol TableViewReusableViewsRegistering {
 }
 
 
-public extension TableViewReusableViewsRegistering where Self: ComposedDataSourceType,
-    Self.ChildDataSource == TableViewDataSourceType {
+public extension TableViewReusableViewsRegistering where Self: Composable, Self.Child == TableViewDataSourceType {
     
     func registerReusableViews(with tableView: UITableView) {
-        for dataSource in dataSources {
+        for dataSource in children {
             (dataSource as? TableViewReusableViewsRegistering)?.registerReusableViews(with: tableView)
         }
     }

@@ -230,14 +230,14 @@ class TableViewDataSourceTests: XCTestCase {
         let shopsDataSource = ShopsDataSource()
         shopsDataSource.registerReusableViews(with: tableView)
     
-        rootDataSource.add(dataSource: eventsDataSource, animated: false)
+        rootDataSource.add(eventsDataSource)
         // Root data source must contain 1 section after adding events data source. Table view must reflect new number of sections.
         XCTAssertEqual(rootDataSource.numberOfSections, 1)
         XCTAssertEqual(tableView.numberOfSections, 1)
         // Data source is empty. Test if the table view reflects this.
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), 0)
         
-        rootDataSource.add(dataSource: shopsDataSource, animated: false)
+        rootDataSource.add(shopsDataSource)
         // Root data source must contain 2 sections after adding shops data source. Table view must reflect new number of sections.
         XCTAssertEqual(rootDataSource.numberOfSections, 2)
         XCTAssertEqual(tableView.numberOfSections, 2)
@@ -245,8 +245,8 @@ class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(tableView.numberOfRows(inSection: 1), 0)
         
         // Test if events and shops data sources are in composition.
-        XCTAssertEqual(rootDataSource.dataSources[0] as! TableViewDataSource, eventsDataSource)
-        XCTAssertEqual(rootDataSource.dataSources[1] as! TableViewDataSource, shopsDataSource)
+        XCTAssertEqual(rootDataSource.children[0] as! TableViewDataSource, eventsDataSource)
+        XCTAssertEqual(rootDataSource.children[1] as! TableViewDataSource, shopsDataSource)
         
         // MARK: Content loading test.
         
@@ -263,6 +263,7 @@ class TableViewDataSourceTests: XCTestCase {
         // Test loading content loading state.
         XCTAssertEqual(rootDataSource.loadingState, .loadingContent)
         
+        // Waiting for will and did load content expectations
         waitForExpectations(timeout: 0.5) { _ in
             // Test content loaded loading state.
             XCTAssertEqual(rootDataSource.loadingState, ContentLoadingState.contentLoaded)
@@ -295,10 +296,11 @@ class TableViewDataSourceTests: XCTestCase {
             // loadingState must be loading content.
             XCTAssertEqual(rootDataSource.loadingState, .loadingContent)
             
+            // Waiting for will and did reload content expectations
             self.waitForExpectations(timeout: 0.5) { _ in
                 // Test content loaded loading state.
                 XCTAssertEqual(rootDataSource.loadingState, .contentLoaded)
-                
+            
                 // Test if content was reloaded succesfully.
                 XCTAssert(eventsDataSource.events.count > 0)
                 XCTAssert(shopsDataSource.shops.count > 0)
@@ -326,6 +328,7 @@ class TableViewDataSourceTests: XCTestCase {
                 // loadingState must be loading content.
                 XCTAssertEqual(rootDataSource.loadingState, .loadingContent)
                 
+                // Waiting for will and did reload content expectations
                 self.waitForExpectations(timeout: 0.5) { _ in
                     // Test error loading state.
                     XCTAssertEqual(rootDataSource.loadingState, .error)

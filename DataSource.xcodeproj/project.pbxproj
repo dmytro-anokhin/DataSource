@@ -28,14 +28,13 @@
 		F4B416F71D3E1F67005E8BFC /* MemoryWarningHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B416F61D3E1F67005E8BFC /* MemoryWarningHandling.swift */; };
 		F4B416FB1D3E5D4A005E8BFC /* TableViewDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B416FA1D3E5D4A005E8BFC /* TableViewDataSourceType.swift */; };
 		F4CD276F1D49FC1B00C24E04 /* ContentLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD27681D49FC1B00C24E04 /* ContentLoading.swift */; };
-		F4CD27721D49FC1B00C24E04 /* ComposedDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD276C1D49FC1B00C24E04 /* ComposedDataSourceType.swift */; };
-		F4CD27731D49FC1B00C24E04 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD276D1D49FC1B00C24E04 /* DataSourceType.swift */; };
 		F4CD277C1D4A000300C24E04 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD277B1D4A000300C24E04 /* Update.swift */; };
 		F4CD277E1D4A005100C24E04 /* UpdateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD277D1D4A005100C24E04 /* UpdateObserver.swift */; };
 		F4CD27801D4A00F200C24E04 /* ContentLoadingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD277F1D4A00F200C24E04 /* ContentLoadingObserver.swift */; };
 		F4CD27831D4A450300C24E04 /* ContentLoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD27811D4A450300C24E04 /* ContentLoadingController.swift */; };
 		F4CD27841D4A450300C24E04 /* ContentLoadingStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD27821D4A450300C24E04 /* ContentLoadingStateMachine.swift */; };
 		F4CD27B51D4B42BA00C24E04 /* TableViewReusableViewsRegistering.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD27B41D4B42BA00C24E04 /* TableViewReusableViewsRegistering.swift */; };
+		F4E164EB1D53B20A00454A17 /* Composable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E164EA1D53B20A00454A17 /* Composable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,8 +76,6 @@
 		F4B416F61D3E1F67005E8BFC /* MemoryWarningHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWarningHandling.swift; sourceTree = "<group>"; };
 		F4B416FA1D3E5D4A005E8BFC /* TableViewDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceType.swift; sourceTree = "<group>"; };
 		F4CD27681D49FC1B00C24E04 /* ContentLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoading.swift; sourceTree = "<group>"; };
-		F4CD276C1D49FC1B00C24E04 /* ComposedDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposedDataSourceType.swift; sourceTree = "<group>"; };
-		F4CD276D1D49FC1B00C24E04 /* DataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		F4CD277B1D4A000300C24E04 /* Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
 		F4CD277D1D4A005100C24E04 /* UpdateObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateObserver.swift; sourceTree = "<group>"; };
 		F4CD277F1D4A00F200C24E04 /* ContentLoadingObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingObserver.swift; sourceTree = "<group>"; };
@@ -86,6 +83,7 @@
 		F4CD27821D4A450300C24E04 /* ContentLoadingStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingStateMachine.swift; sourceTree = "<group>"; };
 		F4CD27B41D4B42BA00C24E04 /* TableViewReusableViewsRegistering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewReusableViewsRegistering.swift; sourceTree = "<group>"; };
 		F4CD27B61D4B4B9200C24E04 /* AmsterdamPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = AmsterdamPlayground.playground; sourceTree = "<group>"; };
+		F4E164EA1D53B20A00454A17 /* Composable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Composable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,9 +252,8 @@
 		F4CD276B1D49FC1B00C24E04 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F4E164E91D53B1EA00454A17 /* Composition */,
 				F4CD277A1D49FFF200C24E04 /* Update */,
-				F4CD276D1D49FC1B00C24E04 /* DataSourceType.swift */,
-				F4CD276C1D49FC1B00C24E04 /* ComposedDataSourceType.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -268,6 +265,14 @@
 				F4CD277D1D4A005100C24E04 /* UpdateObserver.swift */,
 			);
 			path = Update;
+			sourceTree = "<group>";
+		};
+		F4E164E91D53B1EA00454A17 /* Composition */ = {
+			isa = PBXGroup;
+			children = (
+				F4E164EA1D53B20A00454A17 /* Composable.swift */,
+			);
+			path = Composition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4E164EB1D53B20A00454A17 /* Composable.swift in Sources */,
 				F422D9E11CB3114C00576C5A /* TableViewComposedDataSource.swift in Sources */,
 				F422D9E41CB3114C00576C5A /* TableViewUpdate.swift in Sources */,
 				F4CD27831D4A450300C24E04 /* ContentLoadingController.swift in Sources */,
@@ -393,9 +399,7 @@
 				F4CD277E1D4A005100C24E04 /* UpdateObserver.swift in Sources */,
 				F4CD27B51D4B42BA00C24E04 /* TableViewReusableViewsRegistering.swift in Sources */,
 				F4B416FB1D3E5D4A005E8BFC /* TableViewDataSourceType.swift in Sources */,
-				F4CD27721D49FC1B00C24E04 /* ComposedDataSourceType.swift in Sources */,
 				F422D9E31CB3114C00576C5A /* TableViewDataSource.swift in Sources */,
-				F4CD27731D49FC1B00C24E04 /* DataSourceType.swift in Sources */,
 				F422D9DC1CB3114C00576C5A /* ComposedTableViewMapping.swift in Sources */,
 				F4CD276F1D49FC1B00C24E04 /* ContentLoading.swift in Sources */,
 				F4CD27841D4A450300C24E04 /* ContentLoadingStateMachine.swift in Sources */,

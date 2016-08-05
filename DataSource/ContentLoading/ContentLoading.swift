@@ -23,11 +23,15 @@ public enum ContentLoadingState {
     
     /// An error occurred while loading content
     case error
+    
+    public var isLoaded: Bool {
+        return self == .contentLoaded || self == .noContent || self == .error
+    }
 }
 
 
 /// A protocol that defines content loading behavior
-public protocol ContentLoading: ContentLoadingObservable {
+public protocol ContentLoading : ContentLoadingObservable {
 
     /// Current loading state.
     var loadingState: ContentLoadingState { get }
@@ -37,86 +41,52 @@ public protocol ContentLoading: ContentLoadingObservable {
 }
 
 
-/// A helper class passed to the content loading block
-public class ContentLoadingHelper {
+public extension ContentLoading where Self: Composable {
     
-    /// A closure that performs update on the content loading object.
-    public typealias UpdateHandler = () -> Void
+    var loadingState: ContentLoadingState {
     
-    typealias CompletionHandler = (state: ContentLoadingState?, error: NSError?, update: UpdateHandler?) -> Void
-    
-    /// Signals that this result should be ignored. Sends a nil value for the state to the completion handler.
-    public func ignore() {
-        queue.sync {
-            self.doneWithNewState(nil, error: nil, update: nil)
-        }
-    }
-    
-    /// Signals that loading is complete with no errors. This triggers a transition to the Loaded state.
-    public func done() {
-        queue.sync {
-            self.doneWithNewState(.contentLoaded, error: nil, update: nil)
-        }
-    }
-    
-    /// Signals that loading failed with an error. This triggers a transition to the Error state.
-    public func doneWithError(_ error: NSError) {
-        queue.sync {
-            self.doneWithNewState(.error, error: error, update: nil)
-        }
-    }
+        // The numberOf represents number of data sources per each loading state.
+        // Initial state has a value of 1 and used to return from the loop.
+        var numberOf: [ContentLoadingState : UInt] = [
+                .initial : 1,
+                .loadingContent : 0,
+                .contentLoaded : 0,
+                .noContent : 0,
+                .error : 0
+            ]
 
-    /// Signals that loading is complete, transitions into the Loaded state and then runs the update block.
-    public func updateWithContent(_ update: UpdateHandler? = nil) {
-        queue.sync {
-            self.doneWithNewState(.contentLoaded, error: nil, update: update)
+        // Calculating number of content loading data sources per loading state.
+        for dataSource in children {
+            guard let loadingState = (dataSource as? ContentLoading)?.loadingState else { continue }
+            numberOf[loadingState]! += 1
         }
-    }
-    
-    /// Signals that loading completed with no content, transitions to the No Content state and then runs the update block.
-    public func updateWithNoContent(_ update: UpdateHandler? = nil) {
-        queue.sync {
-            self.doneWithNewState(.noContent, error: nil, update: update)
+        
+        // Aggregate loading states by selecting one with highest priority in which there are at least one data source.
+        
+        let loadingStateByPriority: [ContentLoadingState] = [
+            .loadingContent, .error, .noContent, .contentLoaded, .initial
+        ]
+        
+        for loadingState in loadingStateByPriority {
+            if numberOf[loadingState]! > 0 {
+                return loadingState
+            }
         }
+        
+        // If execution reached this point this means that new loading state was added to the enum but not handled in this method.
+        fatalError("All loading states must be present in the list")
     }
     
-    /// Is this the current loading operation? When -loadContentWithBlock: is called it should inform previous instances of BCLoading that they are no longer the current instance.
-    public var current = true
+    func loadContent() {
+        
+        assertMainThread()
     
-    init(completion: CompletionHandler) {
-        self.completion = completion
-    }
-    
-    private struct CompletionInfo {
+        for dataSource in children {
+            (dataSource as? ContentLoading)?.loadContent()
+        }
         
-        let state: ContentLoadingState
-        
-        let error: NSError?
-        
-        let completion: CompletionHandler
-        
-        let update: UpdateHandler
-    }
-
-    private var completion: CompletionHandler?
-
-//    private var lock = NSLock()
-
-    private let queue = DispatchQueue(label: "DataSource.ContentLoadingHelper.serializationQueue")
-
-    private func doneWithNewState(_ state: ContentLoadingState?, error: NSError?, update: UpdateHandler?) {
-        
-//        lock.lock()
-//        
-//        defer {
-//            lock.unlock()
-//        }
-//        
-        guard let completion = completion else { return }
-        self.completion = nil
-        
-        DispatchQueue.main.async { () -> Void in
-            completion(state: state, error: error, update: update)
+        if loadingState == .loadingContent {
+            contentLoadingObserver?.willLoadContent(self)
         }
     }
 }

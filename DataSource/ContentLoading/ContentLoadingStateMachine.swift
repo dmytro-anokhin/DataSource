@@ -30,19 +30,15 @@ public class ContentLoadingStateMachine {
         ],
 
         .contentLoaded : [
-            .noContent,
-            .error
+            .loadingContent
         ],
         
         .noContent : [
-            .contentLoaded,
-            .error
+            .loadingContent
         ],
         
         .error : [
-            .loadingContent,
-            .noContent,
-            .contentLoaded
+            .loadingContent
         ]
     ]
 

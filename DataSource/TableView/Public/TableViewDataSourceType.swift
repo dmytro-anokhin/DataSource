@@ -8,7 +8,7 @@
 
 
 /// The TableViewDataSourceType protocol defines specific methods for UITableView data sources
-public protocol TableViewDataSourceType: DataSourceType, UITableViewDataSource {//, UITableViewDelegate {
+public protocol TableViewDataSourceType : UITableViewDataSource {//, UITableViewDelegate {
 
     /// The number of sections in this data source.
     var numberOfSections: Int { get }

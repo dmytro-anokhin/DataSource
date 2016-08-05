@@ -6,16 +6,20 @@
 //
 
 
-public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, TableViewDataSourceType,
+public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSourceType,
     IndexPathIndexable, TableViewReusableViewsRegistering, ContentLoading,
     UpdateObserver, UpdateObservable, ContentLoadingObserver, ContentLoadingObservable {
     
+    deinit {
+        print("deinit \(self)")
+    }
+    
     // MARK: - ComposedDataSourceType
 
-    public typealias ChildDataSource = TableViewDataSourceType
+    public typealias Child = TableViewDataSourceType
 
     @discardableResult
-    public func add(dataSource: ChildDataSource, animated: Bool) -> Bool {
+    public func add(_ dataSource: Child) -> Bool {
     
         assertMainThread()
 
@@ -34,13 +38,13 @@ public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, Tabl
         updateMappings()
         
         let sections = self.sections(for: dataSource)
-        notify(update: TableViewUpdate.insertSections(sections, animation: animated ? .automatic : .none))
+        notify(update: TableViewUpdate.insertSections(sections))
         
         return true
     }
     
     @discardableResult
-    public func remove(dataSource: ChildDataSource, animated: Bool)  -> Bool {
+    public func remove(_ dataSource: Child)  -> Bool {
     
         assertMainThread()
         
@@ -60,12 +64,12 @@ public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, Tabl
         (dataSource as? ContentLoadingObservable)?.contentLoadingObserver = nil
         
         updateMappings()
-        notify(update: TableViewUpdate.deleteSections(sections, animation: animated ? .automatic : .none))
+        notify(update: TableViewUpdate.deleteSections(sections))
         
         return true
     }
     
-    public var dataSources: [ChildDataSource] {
+    public var children: [Child] {
         return mappings.map { $0.dataSource }
     }
     
@@ -93,7 +97,7 @@ public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, Tabl
     
     public func indexPaths(for object: Any) -> [IndexPath] {
         
-        return dataSources.reduce([]) { indexPaths, dataSource in
+        return children.reduce([]) { indexPaths, dataSource in
             let mapping = self.mapping(for: dataSource)
             let localIndexPaths = (mapping.dataSource as? IndexPathIndexable)?.indexPaths(for: object) ?? []
             
@@ -102,63 +106,8 @@ public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, Tabl
     }
     
     // MARK: - ContentLoading
-    
-    private var aggregatedLoadingState: ContentLoadingState?
 
-    public var loadingState: ContentLoadingState {
-        if let aggregatedLoadingState = aggregatedLoadingState {
-            return aggregatedLoadingState
-        }
-        
-        return updateAggregatedLoadingState()
-    }
-    
     public var loadingError: NSError?
-
-    public func loadContent() {
-        for dataSource in dataSources {
-            (dataSource as? ContentLoading)?.loadContent()
-        }
-    }
-    
-    public var pendingUpdate: Update?
-
-    @discardableResult
-    private func updateAggregatedLoadingState() -> ContentLoadingState {
-    
-        // The numberOf represents number of data sources per each loading state.
-        // Initial state has a value of 1 and used to return from the loop.
-        var numberOf: [ContentLoadingState : UInt] = [
-                .initial : 1,
-                .loadingContent : 0,
-                .contentLoaded : 0,
-                .noContent : 0,
-                .error : 0
-            ]
-
-        // Calculating number of content loading data sources per loading state.
-        for dataSource in dataSources {
-            guard let loadingState = (dataSource as? ContentLoading)?.loadingState else { continue }
-            numberOf[loadingState]! += 1
-        }
-        
-        // Aggregate loading states by selecting one with highest priority in which there are at least one data source.
-        
-        let loadingStateByPriority: [ContentLoadingState] = [
-            .loadingContent, .error, .noContent, .contentLoaded, .initial
-        ]
-        
-        for loadingState in loadingStateByPriority {
-            if numberOf[loadingState]! > 0 {
-                aggregatedLoadingState = loadingState
-                return loadingState
-            }
-        }
-        
-        // If execution reached this point this means that new loading state was added to the enum but not handled in this method.
-        fatalError("All loading states must be present in the list")
-    }
-
     
     // MARK: - UpdateObservable
     
@@ -167,9 +116,24 @@ public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, Tabl
     public func notify(update: Update) {
 
         assertMainThread()
-        updateObserver?.perform(update: update, from: self)
+
+        switch loadingState {
+            case .loadingContent:
+            
+                let batchUpdate = BatchUpdate()
+        
+                if let pendingUpdate = self.pendingUpdate {
+                    batchUpdate.enqueueUpdate(pendingUpdate)
+                }
+
+                batchUpdate.enqueueUpdate(update)
+                self.pendingUpdate = batchUpdate
+
+            default:
+                updateObserver?.perform(update: update, from: self)
+        }
     }
-    
+
     // MARK: - UpdateObserver
     
     public func perform(update: Update, from sender: UpdateObservable) {
@@ -244,25 +208,13 @@ public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, Tabl
     // MARK: - ContentLoadingObserver
     
     public func willLoadContent(_ sender: ContentLoadingObservable) {
-        
-        assertMainThread()
-
-        let previousLoadingState = aggregatedLoadingState
-        updateAggregatedLoadingState()
-        
-        if loadingState == .loadingContent && previousLoadingState != loadingState { // Notify only once - first time loading starts
-            contentLoadingObserver?.willLoadContent(self)
-        }
     }
-    
+
     public func didLoadContent(_ sender: ContentLoadingObservable, with error: NSError?) {
         
         assertMainThread()
-        
-        let previousLoadingState = loadingState
-        updateAggregatedLoadingState()
-        
-        if previousLoadingState == loadingState {
+
+        guard loadingState.isLoaded else {
             return
         }
         
@@ -335,6 +287,8 @@ public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, Tabl
     
     // MARK: - Private
     
+    private var pendingUpdate: Update?
+    
     private var mappings: [ComposedTableViewMapping] = []
     
     // TODO: Figure out how to specify ChildDataSource in generic
@@ -356,7 +310,7 @@ public class TableViewComposedDataSource: NSObject, ComposedDataSourceType, Tabl
         }
     }
 
-    private func sections(for dataSource: ChildDataSource) -> IndexSet {
+    private func sections(for dataSource: Child) -> IndexSet {
     
         let mapping = self.mapping(for: dataSource)
         let sections = NSMutableIndexSet()

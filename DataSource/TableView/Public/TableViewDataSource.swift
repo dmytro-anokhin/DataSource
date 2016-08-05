@@ -9,6 +9,10 @@
 public class TableViewDataSource: NSObject, TableViewDataSourceType, UpdateObservable,
     ContentLoading, ContentLoadingControllerDelegate {
 
+    deinit {
+        print("deinit \(self)")
+    }
+
     // MARK: - Public
     
     private var _contentLoadingController: ContentLoadingController?
@@ -30,7 +34,21 @@ public class TableViewDataSource: NSObject, TableViewDataSourceType, UpdateObser
 
     // MARK: - ContentLoading
     
+    private var _loadingState: ContentLoadingState?
+    
     public var loadingState: ContentLoadingState {
+        
+        // Do not create content loading controller only for introspection
+        if nil == _contentLoadingController {
+            
+            // Data source may be in a loading state from previous content loading operation
+            if let loadingState = _loadingState {
+                return loadingState
+            }
+            
+            return .initial
+        }
+        
         return contentLoadingController.loadingState
     }
     
@@ -50,6 +68,8 @@ public class TableViewDataSource: NSObject, TableViewDataSourceType, UpdateObser
     public func contentLoadingController(_ controller: ContentLoadingController, didFinishLoadingWithUpdate update: () -> Void) {
         notify(update: .arbitraryUpdate(update))
         contentLoadingObserver?.didLoadContent(self, with: controller.loadingError)
+        
+        _loadingState = _contentLoadingController?.loadingState
         _contentLoadingController = nil
     }
     

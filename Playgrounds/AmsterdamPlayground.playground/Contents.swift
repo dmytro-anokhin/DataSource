@@ -181,8 +181,8 @@ class TableViewController: UIViewController, UpdateObserver {
     
     let dataSource: TableViewComposedDataSource = {
         let rootDataSource = TableViewComposedDataSource()
-        rootDataSource.add(dataSource: HeaderDataSource(), animated: false)
-        rootDataSource.add(dataSource: FestivalsDataSource(), animated: false)
+        rootDataSource.add(HeaderDataSource())
+        rootDataSource.add(FestivalsDataSource())
     
         return rootDataSource
     }()

@@ -20,10 +20,10 @@ public extension MemoryWarningHandling {
 }
 
 
-public extension MemoryWarningHandling where Self: ComposedDataSourceType {
+public extension MemoryWarningHandling where Self: Composable {
 
     func didReceiveMemoryWarning() {
-        for dataSource in dataSources {
+        for dataSource in children {
             (dataSource as? MemoryWarningHandling)?.didReceiveMemoryWarning()
         }
     }
