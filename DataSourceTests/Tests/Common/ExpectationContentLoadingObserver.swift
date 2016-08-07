@@ -1,39 +1,28 @@
 //
-//  TestHelpers.swift
+//  ExpectationContentLoadingObserver.swift
 //  DataSource
 //
-//  Created by Dmytro Anokhin on 23/07/16.
+//  Created by Dmytro Anokhin on 06/08/16.
 //  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
 import XCTest
 @testable import DataSource
 
-    
-class TestObserver : DataSource.UpdateObserver, ContentLoadingObserver {
 
-    var tableView: UITableView
-    
-    var performUpdateExpectation: XCTestExpectation?
+/// The ExpectationContentLoadingObserver fulfills expectation on ContentLoadingObserver callbacks.
+class ExpectationContentLoadingObserver : ContentLoadingObserver {
+
     var willLoadContentExpectation: XCTestExpectation?
     var didLoadContentExpectation: XCTestExpectation?
     
-    init(tableView: UITableView,
-        performUpdateExpectation: XCTestExpectation? = nil,
-        willLoadContentExpectation: XCTestExpectation? = nil,
+    init(willLoadContentExpectation: XCTestExpectation? = nil,
         didLoadContentExpectation: XCTestExpectation? = nil)
     {
-        self.tableView = tableView
-        self.performUpdateExpectation = performUpdateExpectation
         self.willLoadContentExpectation = willLoadContentExpectation
         self.didLoadContentExpectation = didLoadContentExpectation
     }
 
-    func perform(update: Update, from sender: UpdateObservable) {
-        update.perform(tableView)
-        performUpdateExpectation?.fulfill()
-    }
-    
     func willLoadContent(_ sender: ContentLoadingObservable) {
         willLoadContentExpectation?.fulfill()
     }
@@ -42,3 +31,4 @@ class TestObserver : DataSource.UpdateObserver, ContentLoadingObserver {
         didLoadContentExpectation?.fulfill()
     }
 }
+

@@ -22,9 +22,13 @@
 		F470936C1D46001D00BE7525 /* Shops.plist in Resources */ = {isa = PBXBuildFile; fileRef = F47093651D46001D00BE7525 /* Shops.plist */; };
 		F470936D1D46001D00BE7525 /* ContentLoadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093671D46001D00BE7525 /* ContentLoadingTests.swift */; };
 		F470936E1D46001D00BE7525 /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093681D46001D00BE7525 /* DataSourceTests.swift */; };
-		F470936F1D46001D00BE7525 /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093691D46001D00BE7525 /* TableViewDataSourceTests.swift */; };
 		F47093711D46002800BE7525 /* ContentLoadingStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093701D46002800BE7525 /* ContentLoadingStateMachineTests.swift */; };
 		F47D43A41D4F96F20064885E /* IndexPathIndexable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47D43A31D4F96F20064885E /* IndexPathIndexable.swift */; };
+		F48D31FC1D55CF770049F934 /* TestTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D31FA1D55CF770049F934 /* TestTableViewDataSource.swift */; };
+		F48D31FD1D55CF770049F934 /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D31FB1D55CF770049F934 /* TableViewDataSourceTests.swift */; };
+		F48D31FF1D55D0430049F934 /* TableViewContentLoadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D31FE1D55D0430049F934 /* TableViewContentLoadingTests.swift */; };
+		F48D32021D55DBFC0049F934 /* ExpectationContentLoadingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D32011D55DBFC0049F934 /* ExpectationContentLoadingObserver.swift */; };
+		F48D32041D55DE490049F934 /* ClosureUpdateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D32031D55DE490049F934 /* ClosureUpdateObserver.swift */; };
 		F4B416F71D3E1F67005E8BFC /* MemoryWarningHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B416F61D3E1F67005E8BFC /* MemoryWarningHandling.swift */; };
 		F4B416FB1D3E5D4A005E8BFC /* TableViewDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B416FA1D3E5D4A005E8BFC /* TableViewDataSourceType.swift */; };
 		F4CD276F1D49FC1B00C24E04 /* ContentLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD27681D49FC1B00C24E04 /* ContentLoading.swift */; };
@@ -70,9 +74,13 @@
 		F47093651D46001D00BE7525 /* Shops.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Shops.plist; sourceTree = "<group>"; };
 		F47093671D46001D00BE7525 /* ContentLoadingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingTests.swift; sourceTree = "<group>"; };
 		F47093681D46001D00BE7525 /* DataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
-		F47093691D46001D00BE7525 /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
 		F47093701D46002800BE7525 /* ContentLoadingStateMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingStateMachineTests.swift; sourceTree = "<group>"; };
 		F47D43A31D4F96F20064885E /* IndexPathIndexable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexPathIndexable.swift; sourceTree = "<group>"; };
+		F48D31FA1D55CF770049F934 /* TestTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableViewDataSource.swift; sourceTree = "<group>"; };
+		F48D31FB1D55CF770049F934 /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
+		F48D31FE1D55D0430049F934 /* TableViewContentLoadingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewContentLoadingTests.swift; sourceTree = "<group>"; };
+		F48D32011D55DBFC0049F934 /* ExpectationContentLoadingObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpectationContentLoadingObserver.swift; sourceTree = "<group>"; };
+		F48D32031D55DE490049F934 /* ClosureUpdateObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureUpdateObserver.swift; sourceTree = "<group>"; };
 		F4B416F61D3E1F67005E8BFC /* MemoryWarningHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWarningHandling.swift; sourceTree = "<group>"; };
 		F4B416FA1D3E5D4A005E8BFC /* TableViewDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceType.swift; sourceTree = "<group>"; };
 		F4CD27681D49FC1B00C24E04 /* ContentLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoading.swift; sourceTree = "<group>"; };
@@ -230,12 +238,40 @@
 		F47093661D46001D00BE7525 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				F48D32001D55D8B80049F934 /* Common */,
+				F48D31F81D55CF770049F934 /* TableView */,
 				F47093671D46001D00BE7525 /* ContentLoadingTests.swift */,
 				F47093681D46001D00BE7525 /* DataSourceTests.swift */,
-				F47093691D46001D00BE7525 /* TableViewDataSourceTests.swift */,
 				F47093701D46002800BE7525 /* ContentLoadingStateMachineTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		F48D31F81D55CF770049F934 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				F48D31F91D55CF770049F934 /* Common */,
+				F48D31FB1D55CF770049F934 /* TableViewDataSourceTests.swift */,
+				F48D31FE1D55D0430049F934 /* TableViewContentLoadingTests.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		F48D31F91D55CF770049F934 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F48D31FA1D55CF770049F934 /* TestTableViewDataSource.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		F48D32001D55D8B80049F934 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F48D32011D55DBFC0049F934 /* ExpectationContentLoadingObserver.swift */,
+				F48D32031D55DE490049F934 /* ClosureUpdateObserver.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		F4CD27671D49FC1B00C24E04 /* ContentLoading */ = {
@@ -414,10 +450,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F48D32021D55DBFC0049F934 /* ExpectationContentLoadingObserver.swift in Sources */,
 				F470936E1D46001D00BE7525 /* DataSourceTests.swift in Sources */,
+				F48D31FC1D55CF770049F934 /* TestTableViewDataSource.swift in Sources */,
+				F48D31FF1D55D0430049F934 /* TableViewContentLoadingTests.swift in Sources */,
 				F470936D1D46001D00BE7525 /* ContentLoadingTests.swift in Sources */,
+				F48D32041D55DE490049F934 /* ClosureUpdateObserver.swift in Sources */,
 				F47093711D46002800BE7525 /* ContentLoadingStateMachineTests.swift in Sources */,
-				F470936F1D46001D00BE7525 /* TableViewDataSourceTests.swift in Sources */,
+				F48D31FD1D55CF770049F934 /* TableViewDataSourceTests.swift in Sources */,
 				F470936A1D46001D00BE7525 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -25,15 +25,10 @@ public class ContentLoadingStateMachine {
         
         .loadingContent : [
             .contentLoaded,
-            .noContent,
             .error
         ],
 
         .contentLoaded : [
-            .loadingContent
-        ],
-        
-        .noContent : [
             .loadingContent
         ],
         

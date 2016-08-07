@@ -125,7 +125,7 @@ public class ContentLoadingHelper {
     /// Signals that loading completed with no content, transitions to the No Content state and then runs the update block.
     public func updateWithNoContent(_ update: UpdateHandler? = nil) {
         queue.sync {
-            self.doneWithNewState(.noContent, error: nil, update: update)
+            self.doneWithNewState(.contentLoaded, error: nil, update: update)
         }
     }
     

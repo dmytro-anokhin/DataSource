@@ -53,11 +53,6 @@ class EventsDataSource : TableViewDataSource, TableViewReusableViewsRegistering 
                     return
                 }
                 
-                if 0 == events.count {
-                    helper.updateWithNoContent()
-                    return
-                }
-                
                 helper.updateWithContent { [weak self] in
                     guard let me = self else { return }
                     me.events = events
@@ -127,11 +122,6 @@ class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
                     return
                 }
                 
-                if 0 == shops.count {
-                    helper.updateWithNoContent()
-                    return
-                }
-                
                 helper.updateWithContent { [weak self] in
                     guard let me = self else { return }
                     me.shops = shops
@@ -158,7 +148,7 @@ class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
 }
 
 
-class ViewController : UpdateObserver, ContentLoadingObserver {
+class ViewController : DataSource.UpdateObserver, ContentLoadingObserver {
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: 320.0, height: 1000.0))

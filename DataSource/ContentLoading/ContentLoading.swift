@@ -18,14 +18,11 @@ public enum ContentLoadingState {
     /// Content is loaded successfully
     case contentLoaded
     
-    /// No content is available
-    case noContent
-    
     /// An error occurred while loading content
     case error
     
     public var isLoaded: Bool {
-        return self == .contentLoaded || self == .noContent || self == .error
+        return self == .contentLoaded || self == .error
     }
 }
 
@@ -51,7 +48,6 @@ public extension ContentLoading where Self: Composable {
                 .initial : 1,
                 .loadingContent : 0,
                 .contentLoaded : 0,
-                .noContent : 0,
                 .error : 0
             ]
 
@@ -64,7 +60,7 @@ public extension ContentLoading where Self: Composable {
         // Aggregate loading states by selecting one with highest priority in which there are at least one data source.
         
         let loadingStateByPriority: [ContentLoadingState] = [
-            .loadingContent, .error, .noContent, .contentLoaded, .initial
+            .loadingContent, .error, .contentLoaded, .initial
         ]
         
         for loadingState in loadingStateByPriority {

@@ -10,31 +10,7 @@ import XCTest
 @testable import DataSource
 
 
-class ContentLoadingTestDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
-
-    let cellReuseIdentifier = "Identifier"
-
-    override var numberOfSections: Int {
-        return sections.count
-    }
-    
-    var sections: [Int]
-    
-    init(sections: [Int]) {
-        self.sections = sections
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section]
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
-    }
-    
-    func registerReusableViews(with tableView: UITableView) {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-    }
+class ContentLoadingTestDataSource : TestTableViewDataSource {
     
     override func loadContent() {
         contentLoadingController.loadContent { helper in
