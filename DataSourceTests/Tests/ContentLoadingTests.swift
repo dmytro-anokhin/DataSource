@@ -13,14 +13,14 @@ import XCTest
 class ContentLoadingTestDataSource : TestTableViewDataSource {
     
     override func loadContent() {
-        contentLoadingController.loadContent { helper in
+        contentLoadingController.loadContent { coordinator in
             DispatchQueue.global().async {
-                guard helper.current else {
-                    helper.ignore()
+                guard coordinator.current else {
+                    coordinator.ignore()
                     return
                 }
                 
-                helper.updateWithContent { [weak self] in
+                coordinator.updateWithContent { [weak self] in
                     guard let me = self else { return }
                     me.sections = [ 1 ]
                     let sections = IndexSet(integer: 0)

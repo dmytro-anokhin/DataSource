@@ -29,12 +29,12 @@ class EventsDataSource : TableViewDataSource, TableViewReusableViewsRegistering 
     // MARK: - ContentLoading
 
     override func loadContent() {
-        contentLoadingController.loadContent { helper in
+        contentLoadingController.loadContent { coordinator in
             DispatchQueue.global().async {
                 guard let path = Bundle(for: self.dynamicType).path(forResource: self.fileName, ofType: "plist"),
                       let array = NSArray(contentsOfFile: path)
                 else {
-                    helper.doneWithError(NSError(domain: "EventsDataSourceErrorDomain", code: 0))
+                    coordinator.doneWithError(NSError(domain: "EventsDataSourceErrorDomain", code: 0))
                     return
                 }
                 
@@ -48,12 +48,12 @@ class EventsDataSource : TableViewDataSource, TableViewReusableViewsRegistering 
                     return Event(title: title)
                 }
             
-                guard helper.current else {
-                    helper.ignore()
+                guard coordinator.current else {
+                    coordinator.ignore()
                     return
                 }
                 
-                helper.updateWithContent { [weak self] in
+                coordinator.updateWithContent { [weak self] in
                     guard let me = self else { return }
                     me.events = events
                     me.notify(update: TableViewUpdate.reloadData())
@@ -98,12 +98,12 @@ class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
     // MARK: - ContentLoading
     
     override func loadContent() {
-        contentLoadingController.loadContent { helper in
+        contentLoadingController.loadContent { coordinator in
             DispatchQueue.global().async {
                 guard let path = Bundle(for: self.dynamicType).path(forResource: self.fileName, ofType: "plist"),
                       let array = NSArray(contentsOfFile: path)
                 else {
-                    helper.doneWithError(NSError(domain: "ShopsDataSourceErrorDomain", code: 0))
+                    coordinator.doneWithError(NSError(domain: "ShopsDataSourceErrorDomain", code: 0))
                     return
                 }
                 
@@ -117,12 +117,12 @@ class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
                     return Shop(name: name)
                 }
             
-                guard helper.current else {
-                    helper.ignore()
+                guard coordinator.current else {
+                    coordinator.ignore()
                     return
                 }
                 
-                helper.updateWithContent { [weak self] in
+                coordinator.updateWithContent { [weak self] in
                     guard let me = self else { return }
                     me.shops = shops
                     me.notify(update: TableViewUpdate.reloadData())

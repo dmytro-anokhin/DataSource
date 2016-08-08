@@ -107,20 +107,20 @@ class FestivalsDataSource: TableViewDataSource, TableViewReusableViewsRegisterin
         festivals = []
         notify(update: TableViewUpdate.reloadData())
 
-        contentLoadingController.loadContent { (helper) in
+        contentLoadingController.loadContent { coordinator in
         
             let task = self.session.dataTask(with: endpointURL) { [weak self] (data, response, error) in
-                guard helper.current else {
-                    helper.ignore()
+                guard coordinator.current else {
+                    coordinator.ignore()
                     return
                 }
                 
                 guard let data = data else {
                     if let error = error {
-                        helper.doneWithError(error)
+                        coordinator.doneWithError(error)
                     }
                     else {
-                        helper.updateWithNoContent()
+                        coordinator.updateWithNoContent()
                     }
                     
                     return
@@ -128,7 +128,7 @@ class FestivalsDataSource: TableViewDataSource, TableViewReusableViewsRegisterin
                 
                 do {
                     guard let array = try JSONSerialization.jsonObject(with: data, options: []) as? NSArray else {
-                        helper.updateWithNoContent()
+                        coordinator.updateWithNoContent()
                         return
                     }
                     
@@ -140,13 +140,13 @@ class FestivalsDataSource: TableViewDataSource, TableViewReusableViewsRegisterin
                         return Festival(title: title)
                     }
                     
-                    helper.updateWithContent {
+                    coordinator.updateWithContent {
                         self?.festivals = festivals
                         self?.notify(update: TableViewUpdate.reloadData())
                     }
                 }
                 catch {
-                    helper.updateWithNoContent()
+                    coordinator.updateWithNoContent()
                 }
             }
             

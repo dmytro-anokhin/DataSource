@@ -31,19 +31,19 @@ class TestContentLoadingTableViewDataSource : TestTableViewDataSource {
     }
     
     override func loadContent() {
-        contentLoadingController.loadContent { helper in
+        contentLoadingController.loadContent { coordinator in
             DispatchQueue.global().async {
-                guard helper.current else {
-                    helper.ignore()
+                guard coordinator.current else {
+                    coordinator.ignore()
                     return
                 }
                 
                 if let error = self.errorToFail {
-                    helper.doneWithError(error)
+                    coordinator.doneWithError(error)
                     return
                 }
                 
-                helper.updateWithContent { [weak self] in
+                coordinator.updateWithContent { [weak self] in
                     guard let me = self else { return }
                     me.sections = me.sectionToLoad
                     me.notify(update: TableViewUpdate.reloadData())
