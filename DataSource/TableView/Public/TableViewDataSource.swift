@@ -48,6 +48,12 @@ public class TableViewDataSource: NSObject, TableViewDataSourceType, UpdateObser
         return contentLoadingController.loadingState
     }
     
+    private var _loadingError: NSError?
+    
+    public var loadingError: NSError? {
+        return _loadingError
+    }
+    
     public func loadContent() {
     }
     
@@ -66,6 +72,8 @@ public class TableViewDataSource: NSObject, TableViewDataSourceType, UpdateObser
         contentLoadingObserver?.didLoadContent(self, with: controller.loadingError)
         
         _loadingState = _contentLoadingController?.loadingState
+        _loadingError = _contentLoadingController?.loadingError
+        
         _contentLoadingController = nil
     }
     
