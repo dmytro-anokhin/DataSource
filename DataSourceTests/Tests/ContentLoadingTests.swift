@@ -24,7 +24,7 @@ class ContentLoadingTestDataSource : TestTableViewDataSource {
                     guard let me = self else { return }
                     me.sections = [ 1 ]
                     let sections = IndexSet(integer: 0)
-                    me.notify(update: TableViewUpdate.insertSections(sections))
+                    me.notifyUpdate(TableViewUpdate.insertSections(sections))
                 }
             }
         }

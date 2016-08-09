@@ -29,7 +29,7 @@ class AnimalsDataSource: TableViewDataSource {
             
             DispatchQueue.main.async {
                 self.animals = animals
-                self.notify(update: TableViewUpdate.reloadData())
+                self.notifyUpdate(TableViewUpdate.reloadData())
             }
         }
     }

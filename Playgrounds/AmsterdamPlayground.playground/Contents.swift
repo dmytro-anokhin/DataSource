@@ -105,7 +105,7 @@ class FestivalsDataSource: TableViewDataSource, TableViewReusableViewsRegisterin
     override func loadContent() {
 
         festivals = []
-        notify(update: TableViewUpdate.reloadData())
+        notifyUpdate(TableViewUpdate.reloadData())
 
         contentLoadingController.loadContent { coordinator in
         
@@ -142,7 +142,7 @@ class FestivalsDataSource: TableViewDataSource, TableViewReusableViewsRegisterin
                     
                     coordinator.done {
                         self?.festivals = festivals
-                        self?.notify(update: TableViewUpdate.reloadData())
+                        self?.notifyUpdate(TableViewUpdate.reloadData())
                     }
                 }
                 catch {
@@ -207,7 +207,7 @@ class TableViewController: UIViewController, UpdateObserver {
         dataSource.loadContent()
     }
     
-    func perform(update: DataSource.Update, from sender: UpdateObservable) {
+    func perform(update: Update, from sender: UpdateObservable) {
         update.perform(tableView)
     }
     

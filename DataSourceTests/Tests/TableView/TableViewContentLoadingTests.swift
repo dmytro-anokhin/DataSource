@@ -48,7 +48,7 @@ class TestContentLoadingTableViewDataSource : TestTableViewDataSource {
                 coordinator.done { [weak self] in
                     guard let me = self else { return }
                     me.sections = me.sectionToLoad
-                    me.notify(update: TableViewUpdate.reloadData())
+                    me.notifyUpdate(TableViewUpdate.reloadData())
                 }
             }
         }

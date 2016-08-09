@@ -24,6 +24,10 @@ public enum ContentLoadingState {
     public var isLoaded: Bool {
         return self == .contentLoaded || self == .error
     }
+    
+    public var isLoading: Bool {
+        return self == .loadingContent
+    }
 }
 
 

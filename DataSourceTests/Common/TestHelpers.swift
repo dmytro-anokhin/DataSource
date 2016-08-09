@@ -10,7 +10,7 @@ import XCTest
 @testable import DataSource
 
     
-class TestObserver : DataSource.UpdateObserver, ContentLoadingObserver {
+class TestObserver : UpdateObserver, ContentLoadingObserver {
 
     var tableView: UITableView
     

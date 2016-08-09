@@ -6,11 +6,11 @@
 //
 
 
-public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSourceType,
+public class TableViewComposedDataSource : DataSource, Composable, TableViewDataSourceType,
     IndexPathIndexable, TableViewReusableViewsRegistering, ContentLoading,
-    UpdateObserver, UpdateObservable, ContentLoadingObserver, ContentLoadingObservable {
+    UpdateObserver, ContentLoadingObserver, ContentLoadingObservable {
     
-    // MARK: - ComposedDataSourceType
+    // MARK: - Composable
 
     public typealias Child = TableViewDataSourceType
 
@@ -34,7 +34,7 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
         _numberOfSections = updateMappings()
         
         let sections = self.sections(for: dataSource)
-        notify(update: TableViewUpdate.insertSections(sections))
+        notifyUpdate(TableViewUpdate.insertSections(sections))
         
         return true
     }
@@ -60,7 +60,7 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
         (dataSource as? ContentLoadingObservable)?.contentLoadingObserver = nil
         
         _numberOfSections = updateMappings()
-        notify(update: TableViewUpdate.deleteSections(sections))
+        notifyUpdate(TableViewUpdate.deleteSections(sections))
         
         return true
     }
@@ -104,31 +104,6 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
     // MARK: - ContentLoading
 
     public var loadingError: NSError?
-    
-    // MARK: - UpdateObservable
-    
-    public weak var updateObserver: UpdateObserver?
-    
-    public func notify(update: Update) {
-
-        assertMainThread()
-
-        switch loadingState {
-            case .loadingContent:
-            
-                let batchUpdate = BatchUpdate()
-        
-                if let pendingUpdate = self.pendingUpdate {
-                    batchUpdate.enqueueUpdate(pendingUpdate)
-                }
-
-                batchUpdate.enqueueUpdate(update)
-                self.pendingUpdate = batchUpdate
-
-            default:
-                updateObserver?.perform(update: update, from: self)
-        }
-    }
 
     // MARK: - UpdateObserver
     
@@ -138,24 +113,24 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
         
         if let _ = update as? TableViewBatchUpdate {
             _numberOfSections = updateMappings()
-            notify(update: update)
+            notifyUpdate(update)
             return
         }
         
         if let _ = update as? TableViewReloadDataUpdate {
             _numberOfSections = updateMappings()
-            notify(update: update)
+            notifyUpdate(update)
             return
         }
     
         guard let structureUpdate = update as? TableViewStructureUpdate else {
-            notify(update: update)
+            notifyUpdate(update)
             return
         }
     
         let mapping = self.mapping(for: dataSource)
         
-        notify(update: structureUpdate.dynamicType.init(type: structureUpdate.type, animation: structureUpdate.animation,
+        notifyUpdate(structureUpdate.dynamicType.init(type: structureUpdate.type, animation: structureUpdate.animation,
             indexPaths: {
                 guard let indexPaths = structureUpdate.indexPaths else { return nil }
                 // Map local index paths to global
@@ -214,27 +189,9 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
             return
         }
         
-        // Enqueue update or perform if loading completed
-        
-        let batchUpdate = BatchUpdate()
-        
-        if let pendingUpdate = pendingUpdate {
-            batchUpdate.enqueueUpdate(pendingUpdate)
-            self.pendingUpdate = nil // Prevent looping on executing pending updates
-        }
-
-        batchUpdate.enqueueUpdate(.arbitraryUpdate({
-            guard let pendingUpdate = self.pendingUpdate else { return }
-            self.notify(update: pendingUpdate)
-        }))
-
-        switch loadingState {
-            case .loadingContent:
-                pendingUpdate = batchUpdate
-
-            default:
-                notify(update: batchUpdate)
-                contentLoadingObserver?.didLoadContent(self, with: error)
+        if loadingState.isLoaded {
+            performPendingUpdate()
+            contentLoadingObserver?.didLoadContent(self, with: error)
         }
     }
 
@@ -282,8 +239,6 @@ public class TableViewComposedDataSource: NSObject, Composable, TableViewDataSou
     }
     
     // MARK: - Private
-    
-    private var pendingUpdate: Update?
     
     private var mappings: [ComposedTableViewMapping] = []
     

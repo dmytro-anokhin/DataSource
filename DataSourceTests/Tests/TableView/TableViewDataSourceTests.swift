@@ -56,7 +56,7 @@ class EventsDataSource : TableViewDataSource, TableViewReusableViewsRegistering 
                 coordinator.done { [weak self] in
                     guard let me = self else { return }
                     me.events = events
-                    me.notify(update: TableViewUpdate.reloadData())
+                    me.notifyUpdate(TableViewUpdate.reloadData())
                 }
             }
         }
@@ -125,7 +125,7 @@ class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
                 coordinator.done { [weak self] in
                     guard let me = self else { return }
                     me.shops = shops
-                    me.notify(update: TableViewUpdate.reloadData())
+                    me.notifyUpdate(TableViewUpdate.reloadData())
                 }
             }
         }
@@ -148,7 +148,7 @@ class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
 }
 
 
-class ViewController : DataSource.UpdateObserver, ContentLoadingObserver {
+class ViewController : UpdateObserver, ContentLoadingObserver {
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: 320.0, height: 1000.0))
@@ -172,7 +172,7 @@ class ViewController : DataSource.UpdateObserver, ContentLoadingObserver {
     var willLoadContentExpectation: XCTestExpectation?
     var didLoadContentExpectation: XCTestExpectation?
     
-    func perform(update: DataSource.Update, from sender: UpdateObservable) {
+    func perform(update: Update, from sender: UpdateObservable) {
         update.perform(tableView)
     }
 
