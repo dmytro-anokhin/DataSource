@@ -29,7 +29,7 @@ public class ContentLoadingController {
         return .initial
     }
 
-    public var loadingError: NSError?
+    public private(set) var loadingError: NSError?
     
     public func loadContent(_ closure: (coordinator: ContentLoadingCoordinator) -> Void) {
     
