@@ -6,20 +6,19 @@
 //  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
-import XCTest
 @testable import DataSource
 
 
-/// The ClosureUpdateObserver encapsulates UpdateObserver callback in a closure.
+/// The `ClosureUpdateObserver` encapsulates `UpdateObserver` callback in a closure.
 class ClosureUpdateObserver : UpdateObserver {
 
-    let closure: (Update, UpdateObservable) -> Void
+    var perform: ((Update, UpdateObservable) -> Void)?
     
-    init(closure: (Update, UpdateObservable) -> Void) {
-        self.closure = closure
+    init(_ perform: ((Update, UpdateObservable) -> Void)?) {
+        self.perform = perform
     }
 
     func perform(update: Update, from sender: UpdateObservable) {
-        closure(update, sender)
+        perform?(update, sender)
     }
 }

@@ -117,10 +117,10 @@ class FestivalsDataSource: TableViewDataSource, TableViewReusableViewsRegisterin
                 
                 guard let data = data else {
                     if let error = error {
-                        coordinator.doneWithError(error)
+                        coordinator.done(withError: error)
                     }
                     else {
-                        coordinator.updateWithNoContent()
+                        coordinator.done()
                     }
                     
                     return
@@ -128,7 +128,7 @@ class FestivalsDataSource: TableViewDataSource, TableViewReusableViewsRegisterin
                 
                 do {
                     guard let array = try JSONSerialization.jsonObject(with: data, options: []) as? NSArray else {
-                        coordinator.updateWithNoContent()
+                        coordinator.done()
                         return
                     }
                     
@@ -140,13 +140,13 @@ class FestivalsDataSource: TableViewDataSource, TableViewReusableViewsRegisterin
                         return Festival(title: title)
                     }
                     
-                    coordinator.updateWithContent {
+                    coordinator.done {
                         self?.festivals = festivals
                         self?.notify(update: TableViewUpdate.reloadData())
                     }
                 }
                 catch {
-                    coordinator.updateWithNoContent()
+                    coordinator.done()
                 }
             }
             

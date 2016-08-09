@@ -20,7 +20,7 @@ class ContentLoadingTestDataSource : TestTableViewDataSource {
                     return
                 }
                 
-                coordinator.updateWithContent { [weak self] in
+                coordinator.done { [weak self] in
                     guard let me = self else { return }
                     me.sections = [ 1 ]
                     let sections = IndexSet(integer: 0)

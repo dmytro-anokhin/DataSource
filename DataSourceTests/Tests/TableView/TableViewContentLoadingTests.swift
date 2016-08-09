@@ -32,18 +32,20 @@ class TestContentLoadingTableViewDataSource : TestTableViewDataSource {
     
     override func loadContent() {
         contentLoadingController.loadContent { coordinator in
-            DispatchQueue.global().async {
+            
+            DispatchQueue.global().asyncAfter(deadline: .now() + drand48() / 10.0) {
+
                 guard coordinator.current else {
                     coordinator.ignore()
                     return
                 }
                 
                 if let error = self.errorToFail {
-                    coordinator.doneWithError(error)
+                    coordinator.done(withError: error)
                     return
                 }
                 
-                coordinator.updateWithContent { [weak self] in
+                coordinator.done { [weak self] in
                     guard let me = self else { return }
                     me.sections = me.sectionToLoad
                     me.notify(update: TableViewUpdate.reloadData())
@@ -99,7 +101,7 @@ class TableViewContentLoadingTests: XCTestCase {
         dataSource.loadContent()
         XCTAssertEqual(dataSource.loadingState, .loadingContent)
 
-        waitForExpectations(timeout: 0.1) { error in
+        waitForExpectations(timeout: 1.0) { error in
             // Keep observers alive
             let _ = contentLoadingObserver
             let _ = updateObserver
@@ -113,7 +115,7 @@ class TableViewContentLoadingTests: XCTestCase {
 
     func testContentLoadingInComposedDataSource() {
     
-        // Setup data sources with content to load, data source without loading logic and composed data source.
+        // Setup data sources with content to load and data source without loading logic.
         let dataSource1 = TestContentLoadingTableViewDataSource(sections: [], sectionToLoad: [1])
         let dataSource2 = TestContentLoadingTableViewDataSource(sections: [], sectionToLoad: [2])
         let dataSource3 = TestTableViewDataSource(sections: [])
@@ -145,7 +147,7 @@ class TableViewContentLoadingTests: XCTestCase {
         dataSource.loadContent()
         XCTAssertEqual(dataSource.loadingState, .loadingContent)
         
-        waitForExpectations(timeout: 0.1) { error in
+        waitForExpectations(timeout: 1.0) { error in
             // Keep observers alive.
             let _ = contentLoadingObserver
             let _ = updateObserver
@@ -194,7 +196,7 @@ class TableViewContentLoadingTests: XCTestCase {
         dataSource.loadContent()
         XCTAssertEqual(dataSource.loadingState, .loadingContent)
 
-        waitForExpectations(timeout: 0.1) { error in
+        waitForExpectations(timeout: 1.0) { error in
             // Keep observers alive.
             let _ = contentLoadingObserver
             let _ = updateObserver
@@ -205,13 +207,13 @@ class TableViewContentLoadingTests: XCTestCase {
             
             // Verify error
             let testError = self.makeError()
-            XCTAssertEqual(dataSource.loadingError!, testError)
+            XCTAssertEqual(dataSource.loadingError, testError)
         }
     }
     
     func testContentLoadingFailureInComposedDataSource() {
 
-        // Setup data sources with content to load, error to fail, data source without content loading logic and composed data source.
+        // Setup data sources with content to load, error to fail and data source without content loading logic.
         let dataSource1 = TestContentLoadingTableViewDataSource(sections: [], sectionToLoad: [1], errorToFail: makeError())
         let dataSource2 = TestContentLoadingTableViewDataSource(sections: [], sectionToLoad: [2])
         let dataSource3 = TestTableViewDataSource(sections: [])
@@ -243,7 +245,7 @@ class TableViewContentLoadingTests: XCTestCase {
         dataSource.loadContent()
         XCTAssertEqual(dataSource.loadingState, .loadingContent)
         
-        waitForExpectations(timeout: 0.1) { error in
+        waitForExpectations(timeout: 1.0) { error in
             // Keep observers alive.
             let _ = contentLoadingObserver
             let _ = updateObserver
@@ -255,7 +257,76 @@ class TableViewContentLoadingTests: XCTestCase {
             
             // Verify error
             let testError = self.makeError()
-            XCTAssertEqual(dataSource1.loadingError!, testError)
+            XCTAssertEqual(dataSource1.loadingError, testError)
+        }
+    }
+    
+    // MARK: - Test starting multiple loading operations
+    
+    func testMultipleContentLoadingInComposedDataSource() {
+        
+        // Setup data sources with content to load and data source without content loading logic.
+        let dataSource1 = TestContentLoadingTableViewDataSource(sections: [], sectionToLoad: [1])
+        let dataSource2 = TestContentLoadingTableViewDataSource(sections: [], sectionToLoad: [2])
+        let dataSource3 = TestTableViewDataSource(sections: [])
+        
+        let dataSource = TableViewComposedDataSource()
+        dataSource.add(dataSource1)
+        dataSource.add(dataSource2)
+        dataSource.add(dataSource3)
+        
+        dataSource.registerReusableViews(with: tableView)
+        
+        tableView.dataSource = dataSource
+        tableView.reloadData()
+        
+        // Verify loading state and number of sections.
+        XCTAssertEqual(dataSource.loadingState, .initial)
+        XCTAssertEqual(tableView.numberOfSections, 0)
+
+        // Number of times load content is triggered
+        let times = 3
+
+        // Setup expectations and observers.
+        var counter = 0
+        
+        let willLoadContentExpectation = expectation(description: "willLoadContentExpectation")
+        let didLoadContentExpectation = expectation(description: "didLoadContentExpectation")
+        
+        let contentLoadingObserver = ClosureContentLoadingObserver(
+            willLoadContent: { (sender) in
+                counter += 1
+            
+                if counter == times {
+                    willLoadContentExpectation.fulfill()
+                }
+            },
+            didLoadContent: { (sender) in
+                if counter == times {
+                    didLoadContentExpectation.fulfill()
+                }
+            })
+        dataSource.contentLoadingObserver = contentLoadingObserver
+        
+        let updateObserver = ClosureUpdateObserver { $0.0.perform(self.tableView) }
+        dataSource.updateObserver = updateObserver
+        
+        // Begin loading multiple times
+        for _ in 0..<times {
+            dataSource.loadContent()
+            XCTAssertEqual(dataSource.loadingState, .loadingContent)
+        }
+        
+        waitForExpectations(timeout: 1.0) { error in
+            // Keep observers alive.
+            let _ = contentLoadingObserver
+            let _ = updateObserver
+            
+            // Verify loading state, number of sections and rows.
+            XCTAssertEqual(dataSource.loadingState, .contentLoaded)
+            XCTAssertEqual(self.tableView.numberOfSections, 2)
+            XCTAssertEqual(self.tableView.numberOfRows(inSection: 0), 1)
+            XCTAssertEqual(self.tableView.numberOfRows(inSection: 1), 2)
         }
     }
 }

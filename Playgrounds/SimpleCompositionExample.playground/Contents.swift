@@ -60,8 +60,8 @@ class TableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataSource.add(dataSource: AnimalsDataSource(), animated: false)
-        dataSource.add(dataSource: InsectsDataSource(), animated: false)
+        dataSource.add(AnimalsDataSource())
+        dataSource.add(InsectsDataSource())
         
         dataSource.registerReusableViews(with: tableView)
         tableView.dataSource = dataSource

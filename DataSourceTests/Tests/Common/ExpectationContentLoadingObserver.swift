@@ -10,7 +10,7 @@ import XCTest
 @testable import DataSource
 
 
-/// The ExpectationContentLoadingObserver fulfills expectation on ContentLoadingObserver callbacks.
+/// The `ExpectationContentLoadingObserver` fulfills expectation on `ContentLoadingObserver` callbacks.
 class ExpectationContentLoadingObserver : ContentLoadingObserver {
 
     var willLoadContentExpectation: XCTestExpectation?
@@ -31,4 +31,3 @@ class ExpectationContentLoadingObserver : ContentLoadingObserver {
         didLoadContentExpectation?.fulfill()
     }
 }
-

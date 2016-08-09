@@ -23,6 +23,7 @@
 		F470936D1D46001D00BE7525 /* ContentLoadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093671D46001D00BE7525 /* ContentLoadingTests.swift */; };
 		F470936E1D46001D00BE7525 /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093681D46001D00BE7525 /* DataSourceTests.swift */; };
 		F47093711D46002800BE7525 /* ContentLoadingStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093701D46002800BE7525 /* ContentLoadingStateMachineTests.swift */; };
+		F474A60F1D5986FF0030233D /* ClosureContentLoadingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F474A60E1D5986FF0030233D /* ClosureContentLoadingObserver.swift */; };
 		F47D43A41D4F96F20064885E /* IndexPathIndexable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47D43A31D4F96F20064885E /* IndexPathIndexable.swift */; };
 		F48D31FC1D55CF770049F934 /* TestTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D31FA1D55CF770049F934 /* TestTableViewDataSource.swift */; };
 		F48D31FD1D55CF770049F934 /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D31FB1D55CF770049F934 /* TableViewDataSourceTests.swift */; };
@@ -76,6 +77,7 @@
 		F47093671D46001D00BE7525 /* ContentLoadingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingTests.swift; sourceTree = "<group>"; };
 		F47093681D46001D00BE7525 /* DataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
 		F47093701D46002800BE7525 /* ContentLoadingStateMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingStateMachineTests.swift; sourceTree = "<group>"; };
+		F474A60E1D5986FF0030233D /* ClosureContentLoadingObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureContentLoadingObserver.swift; sourceTree = "<group>"; };
 		F47D43A31D4F96F20064885E /* IndexPathIndexable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexPathIndexable.swift; sourceTree = "<group>"; };
 		F48D31FA1D55CF770049F934 /* TestTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableViewDataSource.swift; sourceTree = "<group>"; };
 		F48D31FB1D55CF770049F934 /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			children = (
 				F48D32011D55DBFC0049F934 /* ExpectationContentLoadingObserver.swift */,
 				F48D32031D55DE490049F934 /* ClosureUpdateObserver.swift */,
+				F474A60E1D5986FF0030233D /* ClosureContentLoadingObserver.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F474A60F1D5986FF0030233D /* ClosureContentLoadingObserver.swift in Sources */,
 				F48D32021D55DBFC0049F934 /* ExpectationContentLoadingObserver.swift in Sources */,
 				F470936E1D46001D00BE7525 /* DataSourceTests.swift in Sources */,
 				F48D31FC1D55CF770049F934 /* TestTableViewDataSource.swift in Sources */,

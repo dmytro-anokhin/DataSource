@@ -34,7 +34,7 @@ class EventsDataSource : TableViewDataSource, TableViewReusableViewsRegistering 
                 guard let path = Bundle(for: self.dynamicType).path(forResource: self.fileName, ofType: "plist"),
                       let array = NSArray(contentsOfFile: path)
                 else {
-                    coordinator.doneWithError(NSError(domain: "EventsDataSourceErrorDomain", code: 0))
+                    coordinator.done(withError: NSError(domain: "EventsDataSourceErrorDomain", code: 0))
                     return
                 }
                 
@@ -53,7 +53,7 @@ class EventsDataSource : TableViewDataSource, TableViewReusableViewsRegistering 
                     return
                 }
                 
-                coordinator.updateWithContent { [weak self] in
+                coordinator.done { [weak self] in
                     guard let me = self else { return }
                     me.events = events
                     me.notify(update: TableViewUpdate.reloadData())
@@ -103,7 +103,7 @@ class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
                 guard let path = Bundle(for: self.dynamicType).path(forResource: self.fileName, ofType: "plist"),
                       let array = NSArray(contentsOfFile: path)
                 else {
-                    coordinator.doneWithError(NSError(domain: "ShopsDataSourceErrorDomain", code: 0))
+                    coordinator.done(withError: NSError(domain: "ShopsDataSourceErrorDomain", code: 0))
                     return
                 }
                 
@@ -122,7 +122,7 @@ class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
                     return
                 }
                 
-                coordinator.updateWithContent { [weak self] in
+                coordinator.done { [weak self] in
                     guard let me = self else { return }
                     me.shops = shops
                     me.notify(update: TableViewUpdate.reloadData())
