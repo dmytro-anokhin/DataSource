@@ -34,7 +34,7 @@ public class TableViewDataSource: NSObject, TableViewDataSourceType, UpdateObser
     
     public var loadingState: ContentLoadingState {
         
-        // Do not create content loading controller only for introspection
+        // Do not create content loading controller only for state introspection
         if nil == _contentLoadingController {
             
             // Data source may be in a loading state from previous content loading operation

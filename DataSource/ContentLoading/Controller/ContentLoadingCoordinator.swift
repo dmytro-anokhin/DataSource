@@ -7,9 +7,9 @@
 //
 
 
-/** The `ContentLoadingCoordinator` receives signals from content loading process and performs necessary state transitions on the `ContentLoadingController`.
+/** The `ContentLoadingCoordinator` is a helper class that receives signals from content loading process and notifies state transition to the `ContentLoadingController`.
 
-    The `ContentLoadingCoordinator` can receive signals from any thread. State transition is performed on the main queue.
+    The `ContentLoadingCoordinator` can receive signals from any thread. State transition is notified on the main queue.
 */
 public class ContentLoadingCoordinator {
     
