@@ -13,36 +13,24 @@
 */
 public class ContentLoadingCoordinator {
     
-    /// A closure that performs update on the content loading object.
-    public typealias UpdateHandler = () -> Void
-    
-    typealias CompletionHandler = (state: ContentLoadingState?, error: NSError?, update: UpdateHandler?) -> Void
-    
-    init(completion: CompletionHandler) {
-        self.completion = completion
-    }
-    
     // MARK: - Public
+    
+    /// A closure that performs update on the content loading object.
+    public typealias Update = () -> Void
     
     /// Signals that this result should be ignored.
     public func ignore() {
-        queue.async(flags: .barrier) {
-            self.done(withState: nil, error: nil, update: nil)
-        }
+        done(withState: nil, error: nil, update: nil)
     }
     
     /// Signals that loading failed with an error. This triggers a transition to the `.error` state.
     public func done(withError error: NSError) {
-        queue.async(flags: .barrier) {
-            self.done(withState: .error, error: error, update: nil)
-        }
+        done(withState: .error, error: error, update: nil)
     }
 
     /// Signals that loading is complete, transitions into the `.loaded` state and then runs the update block.
-    public func done(withUpdate update: UpdateHandler? = nil) {
-        queue.async(flags: .barrier) {
-            self.done(withState: .contentLoaded, error: nil, update: update)
-        }
+    public func done(withUpdate update: Update? = nil) {
+        done(withState: .contentLoaded, error: nil, update: update)
     }
     
     private var _current = true
@@ -66,6 +54,14 @@ public class ContentLoadingCoordinator {
         }
     }
     
+    // MARK: - Internal
+    
+    typealias CompletionHandler = (state: ContentLoadingState?, error: NSError?, update: Update?) -> Void
+    
+    init(completion: CompletionHandler) {
+        self.completion = completion
+    }
+    
     // MARK: - Private
     
     private var completion: CompletionHandler?
@@ -74,13 +70,14 @@ public class ContentLoadingCoordinator {
     private let queue = DispatchQueue(label: "DataSource.ContentLoadingCoordinator.synchronizationQueue",
         attributes: .concurrent)
 
-    private func done(withState state: ContentLoadingState?, error: NSError?, update: UpdateHandler?) {
-
-        guard let completion = completion else { return }
-        self.completion = nil
-        
-        DispatchQueue.main.async { () -> Void in
-            completion(state: state, error: error, update: update)
+    private func done(withState state: ContentLoadingState?, error: NSError?, update: Update?) {
+        queue.async(flags: .barrier) {
+            guard let completion = self.completion else { return }
+            self.completion = nil
+            
+            DispatchQueue.main.async { () -> Void in
+                completion(state: state, error: error, update: update)
+            }
         }
     }
 }
