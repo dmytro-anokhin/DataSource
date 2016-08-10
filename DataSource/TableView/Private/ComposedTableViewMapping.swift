@@ -23,7 +23,7 @@ class ComposedTableViewMapping: NSObject {
     
     /// Return the local section for a global section
     func localSection(for globalSection: Int) -> Int? {
-    
+
         return globalToLocalSections[globalSection]
     }
     
@@ -106,7 +106,7 @@ class ComposedTableViewMapping: NSObject {
         }
         
         for localSection in 0...sectionCount - 1 {
-            addMappingFromGlobalSection(globalSection, toLocalSection: localSection)
+            addMapping(fromGlobalSection: globalSection, toLocalSection: localSection)
             globalSection += 1
         }
         
@@ -115,7 +115,7 @@ class ComposedTableViewMapping: NSObject {
 
     // MARK: - Private
 
-    private func addMappingFromGlobalSection(_ globalSection: Int, toLocalSection localSection: Int) {
+    private func addMapping(fromGlobalSection globalSection: Int, toLocalSection localSection: Int) {
     
         assert(nil == localToGlobalSections[localSection], "collision while trying to add to a mapping")
         globalToLocalSections[globalSection] = localSection

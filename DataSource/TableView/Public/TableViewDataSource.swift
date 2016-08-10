@@ -6,7 +6,7 @@
 //
 
 
-public class TableViewDataSource: ContentLoadingDataSource, TableViewDataSourceType {
+public class TableViewDataSource : ContentLoadingDataSource, TableViewDataSourceType {
 
     // MARK: - TableViewDataSourceType
 
