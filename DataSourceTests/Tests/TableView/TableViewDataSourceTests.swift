@@ -79,7 +79,7 @@ class EventsDataSource : TableViewDataSource, TableViewReusableViewsRegistering 
 }
 
 
-class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
+class ShopsDataSource : TableViewDataSource, IndexPathIndexable, TableViewReusableViewsRegistering {
     
     let cellReuseIdentifier = "ShopCell"
     
@@ -93,6 +93,27 @@ class ShopsDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
     
     func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+    }
+    
+    // MARK: - IndexPathIndexable
+    
+    func object(at indexPath: IndexPath) -> Any? {
+        return indexPath.row < shops.count ? shops[indexPath.row] : nil
+    }
+    
+    func indexPaths(for object: Any) -> [IndexPath] {
+        
+        guard let shop = object as? Shop else { return [] }
+    
+        var indexPaths: [IndexPath] = []
+        
+        for (index, element) in shops.enumerated() {
+            if shop.name == element.name {
+                indexPaths.append(IndexPath(row: index, section: 0))
+            }
+        }
+        
+        return indexPaths
     }
 
     // MARK: - ContentLoading
@@ -261,6 +282,16 @@ class TableViewDataSourceTests: XCTestCase {
             // Test if content was loaded succesfully.
             XCTAssert(eventsDataSource.events.count > 0)
             XCTAssert(shopsDataSource.shops.count > 0)
+            
+            // Test if we can access object by index path
+            let event = rootDataSource.object(at: IndexPath(row: 1, section: 0))
+            XCTAssertNil(event) // Events data source doesn't implements IndexPathIndexable protocol
+            
+            let shop = rootDataSource.object(at: IndexPath(row: 1, section: 1))
+            XCTAssertNotNil(shop) // Shops data source implements IndexPathIndexable protocol
+            
+            let indexPaths = rootDataSource.indexPaths(for: shop)
+            XCTAssertEqual(indexPaths, [ IndexPath(row: 1, section: 1) ])
             
             // Test if table view reflects changes.
             XCTAssertEqual(tableView.numberOfRows(inSection: 0), eventsDataSource.events.count)

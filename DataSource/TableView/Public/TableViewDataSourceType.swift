@@ -12,4 +12,16 @@ public protocol TableViewDataSourceType : UITableViewDataSource {//, UITableView
 
     /// The number of sections in this data source.
     var numberOfSections: Int { get }
+    
+    /// Performs necessary actions to set up this data source with provided tableview.
+    func configure(with tableView: UITableView)
+}
+
+
+public extension TableViewDataSourceType {
+    
+    func configure(with tableView: UITableView) {
+        (self as? TableViewReusableViewsRegistering)?.registerReusableViews(with: tableView)
+        tableView.dataSource = self
+    }
 }
