@@ -6,7 +6,6 @@
 //  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
-import UIKit
 
 // TODO: Rename in insert(sections:) insert(rows:)
 

@@ -5,7 +5,6 @@
 //  Copyright © 2015 danokhin. All rights reserved.
 //
 
-import UIKit
 
 // TODO: Use Swift 3.0 syntax or move back to Objective-C
 

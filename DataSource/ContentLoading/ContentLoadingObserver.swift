@@ -6,8 +6,6 @@
 //  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
-import Foundation
-
 
 public protocol ContentLoadingObservable : class {
     

@@ -6,8 +6,6 @@
 //  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
-import UIKit
-
 
 /// The Update class encapsulates request to update view from data source
 // TODO: Why class, only for inheritance? maybe protocol, struct or enum? at least mark as final

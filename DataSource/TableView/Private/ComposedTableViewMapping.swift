@@ -5,8 +5,6 @@
 //  Copyright © 2015 danokhin. All rights reserved.
 //
 
-import UIKit
-
 
 /// Maps global sections to local sections for a given data source
 class ComposedTableViewMapping: NSObject {
