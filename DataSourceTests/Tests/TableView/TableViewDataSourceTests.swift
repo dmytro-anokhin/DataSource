@@ -357,8 +357,4 @@ class TableViewDataSourceTests: XCTestCase {
             }
         }
     }
-    
-    func testStaticCellsDataSource() {
-        
-    }
 }

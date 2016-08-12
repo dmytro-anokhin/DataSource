@@ -56,7 +56,7 @@ class TestContentLoadingTableViewDataSource : TestTableViewDataSource {
 }
 
 
-class TableViewContentLoadingTests: XCTestCase {
+class TableViewContentLoadingTests : XCTestCase {
     
     var tableView: UITableView!
     

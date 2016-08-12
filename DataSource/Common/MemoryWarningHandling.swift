@@ -13,13 +13,6 @@ public protocol MemoryWarningHandling {
 }
 
 
-public extension MemoryWarningHandling {
-
-    func didReceiveMemoryWarning() {
-    }
-}
-
-
 public extension MemoryWarningHandling where Self: Composable {
 
     func didReceiveMemoryWarning() {
