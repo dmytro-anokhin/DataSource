@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F413BD591D5F060200779E84 /* ContentLoadingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F413BD581D5F060200779E84 /* ContentLoadingControllerTests.swift */; };
 		F416918E1D5AA93D0096AC90 /* TableViewDataSourceComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F416918D1D5AA93D0096AC90 /* TableViewDataSourceComposition.swift */; };
 		F422D9C71CB3111400576C5A /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422D9B71CB3111400576C5A /* Helpers.swift */; };
 		F422D9DC1CB3114C00576C5A /* ComposedTableViewMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422D9D21CB3114C00576C5A /* ComposedTableViewMapping.swift */; };
@@ -23,7 +24,6 @@
 		F470936C1D46001D00BE7525 /* Shops.plist in Resources */ = {isa = PBXBuildFile; fileRef = F47093651D46001D00BE7525 /* Shops.plist */; };
 		F470936D1D46001D00BE7525 /* ContentLoadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093671D46001D00BE7525 /* ContentLoadingTests.swift */; };
 		F470936E1D46001D00BE7525 /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093681D46001D00BE7525 /* DataSourceTests.swift */; };
-		F47093711D46002800BE7525 /* ContentLoadingStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093701D46002800BE7525 /* ContentLoadingStateMachineTests.swift */; };
 		F47D43A41D4F96F20064885E /* IndexPathIndexable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47D43A31D4F96F20064885E /* IndexPathIndexable.swift */; };
 		F48D31FC1D55CF770049F934 /* TestTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D31FA1D55CF770049F934 /* TestTableViewDataSource.swift */; };
 		F48D31FD1D55CF770049F934 /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D31FB1D55CF770049F934 /* TableViewDataSourceTests.swift */; };
@@ -44,6 +44,8 @@
 		F4F7D08E1D5D9CEF00513A8F /* ClosureUpdateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F7D08B1D5D9CEF00513A8F /* ClosureUpdateObserver.swift */; };
 		F4F7D08F1D5D9CEF00513A8F /* ExpectationContentLoadingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F7D08C1D5D9CEF00513A8F /* ExpectationContentLoadingObserver.swift */; };
 		F4F7D0921D5D9D3100513A8F /* MemoryWarningHandlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F7D0911D5D9D3100513A8F /* MemoryWarningHandlingTests.swift */; };
+		F4F7D0951D5DB78F00513A8F /* ContentLoadingStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F7D0941D5DB78F00513A8F /* ContentLoadingStateMachineTests.swift */; };
+		F4F7D0971D5DB79D00513A8F /* ContentLoadingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F7D0961D5DB79D00513A8F /* ContentLoadingCoordinatorTests.swift */; };
 		F4FB9D721D59C54400AD5ED8 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB9D711D59C54400AD5ED8 /* DataSource.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		F40C9C8C1D48A2BD00457C1E /* StaticCellsPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = StaticCellsPlayground.playground; sourceTree = "<group>"; };
+		F413BD581D5F060200779E84 /* ContentLoadingControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingControllerTests.swift; sourceTree = "<group>"; };
 		F416918D1D5AA93D0096AC90 /* TableViewDataSourceComposition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceComposition.swift; sourceTree = "<group>"; };
 		F422D9B71CB3111400576C5A /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		F422D9D21CB3114C00576C5A /* ComposedTableViewMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposedTableViewMapping.swift; sourceTree = "<group>"; };
@@ -81,7 +84,6 @@
 		F47093651D46001D00BE7525 /* Shops.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Shops.plist; sourceTree = "<group>"; };
 		F47093671D46001D00BE7525 /* ContentLoadingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingTests.swift; sourceTree = "<group>"; };
 		F47093681D46001D00BE7525 /* DataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
-		F47093701D46002800BE7525 /* ContentLoadingStateMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingStateMachineTests.swift; sourceTree = "<group>"; };
 		F47D43A31D4F96F20064885E /* IndexPathIndexable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexPathIndexable.swift; sourceTree = "<group>"; };
 		F48D31FA1D55CF770049F934 /* TestTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableViewDataSource.swift; sourceTree = "<group>"; };
 		F48D31FB1D55CF770049F934 /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
@@ -103,6 +105,8 @@
 		F4F7D08B1D5D9CEF00513A8F /* ClosureUpdateObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureUpdateObserver.swift; sourceTree = "<group>"; };
 		F4F7D08C1D5D9CEF00513A8F /* ExpectationContentLoadingObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpectationContentLoadingObserver.swift; sourceTree = "<group>"; };
 		F4F7D0911D5D9D3100513A8F /* MemoryWarningHandlingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWarningHandlingTests.swift; sourceTree = "<group>"; };
+		F4F7D0941D5DB78F00513A8F /* ContentLoadingStateMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingStateMachineTests.swift; sourceTree = "<group>"; };
+		F4F7D0961D5DB79D00513A8F /* ContentLoadingCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingCoordinatorTests.swift; sourceTree = "<group>"; };
 		F4FB9D711D59C54400AD5ED8 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -255,10 +259,10 @@
 			isa = PBXGroup;
 			children = (
 				F4F7D0901D5D9CFF00513A8F /* Components */,
+				F4F7D0931D5DB78F00513A8F /* ContentLoading */,
 				F48D31F81D55CF770049F934 /* TableView */,
 				F47093671D46001D00BE7525 /* ContentLoadingTests.swift */,
 				F47093681D46001D00BE7525 /* DataSourceTests.swift */,
-				F47093701D46002800BE7525 /* ContentLoadingStateMachineTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -335,6 +339,16 @@
 				F4F7D0911D5D9D3100513A8F /* MemoryWarningHandlingTests.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		F4F7D0931D5DB78F00513A8F /* ContentLoading */ = {
+			isa = PBXGroup;
+			children = (
+				F4F7D0941D5DB78F00513A8F /* ContentLoadingStateMachineTests.swift */,
+				F4F7D0961D5DB79D00513A8F /* ContentLoadingCoordinatorTests.swift */,
+				F413BD581D5F060200779E84 /* ContentLoadingControllerTests.swift */,
+			);
+			path = ContentLoading;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -481,12 +495,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4F7D08E1D5D9CEF00513A8F /* ClosureUpdateObserver.swift in Sources */,
+				F413BD591D5F060200779E84 /* ContentLoadingControllerTests.swift in Sources */,
 				F470936E1D46001D00BE7525 /* DataSourceTests.swift in Sources */,
 				F48D31FC1D55CF770049F934 /* TestTableViewDataSource.swift in Sources */,
 				F4F7D08D1D5D9CEF00513A8F /* ClosureContentLoadingObserver.swift in Sources */,
+				F4F7D0951D5DB78F00513A8F /* ContentLoadingStateMachineTests.swift in Sources */,
 				F48D31FF1D55D0430049F934 /* TableViewContentLoadingTests.swift in Sources */,
 				F470936D1D46001D00BE7525 /* ContentLoadingTests.swift in Sources */,
-				F47093711D46002800BE7525 /* ContentLoadingStateMachineTests.swift in Sources */,
+				F4F7D0971D5DB79D00513A8F /* ContentLoadingCoordinatorTests.swift in Sources */,
 				F4F7D0921D5D9D3100513A8F /* MemoryWarningHandlingTests.swift in Sources */,
 				F48D31FD1D55CF770049F934 /* TableViewDataSourceTests.swift in Sources */,
 				F470936A1D46001D00BE7525 /* TestHelpers.swift in Sources */,
