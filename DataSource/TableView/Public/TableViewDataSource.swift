@@ -6,11 +6,11 @@
 //
 
 
-public class TableViewDataSource : ContentLoadingDataSource, TableViewDataSourceType {
+open class TableViewDataSource : ContentLoadingDataSource, TableViewDataSourceType {
 
     // MARK: - TableViewDataSourceType
 
-    public var numberOfSections: Int {
+    open var numberOfSections: Int {
         return 1
     }
     
@@ -18,17 +18,17 @@ public class TableViewDataSource : ContentLoadingDataSource, TableViewDataSource
     
     // required
     
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         fatalError("Not implemented")
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         fatalError("Not implemented")
     }
     
     // optional
     
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return numberOfSections
     }
 }

@@ -40,7 +40,7 @@ public protocol ContentLoading : ContentLoadingObservable {
     /// Loading error. Valid only when loadingState == .error
     var loadingError: NSError? { get }
     
-    /// Method used to begin loading the content.
+    /// Used to begin loading the content.
     func loadContent()
 }
 

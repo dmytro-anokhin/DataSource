@@ -5,7 +5,7 @@ import PlaygroundSupport
 import DataSource
 
 
-class AnimalsDataSource: TableViewDataSource {
+class AnimalsDataSource : TableViewDataSource {
 
     func registerReusableViews(with tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AnimalCell")

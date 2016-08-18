@@ -117,7 +117,9 @@ class FestivalsDataSource: TableViewDataSource, TableViewReusableViewsRegisterin
                 
                 guard let data = data else {
                     if let error = error {
-                        coordinator.done(withError: error)
+// TODO: Replace NSError in framework with Error protocol
+//                        coordinator.done(withError: error)
+                        coordinator.done()
                     }
                     else {
                         coordinator.done()

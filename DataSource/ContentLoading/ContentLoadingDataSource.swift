@@ -11,7 +11,7 @@
 
     Base class implements content loading functionality.
 */
-public class ContentLoadingDataSource : DataSource, ContentLoading, ContentLoadingControllerDelegate {
+open class ContentLoadingDataSource : DataSource, ContentLoading, ContentLoadingControllerDelegate {
     
     // MARK: - ContentLoadingObservable
     
@@ -54,7 +54,7 @@ public class ContentLoadingDataSource : DataSource, ContentLoading, ContentLoadi
         return _loadingError
     }
     
-    public func loadContent() {
+    open func loadContent() {
     }
     
     // MARK: - ContentLoadingControllerDelegate
@@ -63,16 +63,16 @@ public class ContentLoadingDataSource : DataSource, ContentLoading, ContentLoadi
         contentLoadingObserver?.willLoadContent(self)
     }
     
-    public func contentLoadingController(_ controller: ContentLoadingController, didFinishLoadingWithUpdate update: () -> Void) {
-        //notify(update: .arbitraryUpdate(update))
-        enqueueUpdate(.arbitraryUpdate(update))
-        performPendingUpdate()
-        
-        contentLoadingObserver?.didLoadContent(self, with: controller.loadingError)
-        
+    public func contentLoadingController(_ controller: ContentLoadingController, didFinishLoadingWithUpdate update: @escaping () -> Void) {
+
         _loadingState = _contentLoadingController?.loadingState
         _loadingError = _contentLoadingController?.loadingError
         
         _contentLoadingController = nil
+        
+        enqueueUpdate(.arbitraryUpdate(update))
+        performPendingUpdate()
+        
+        contentLoadingObserver?.didLoadContent(self, with: controller.loadingError)
     }
 }

@@ -12,22 +12,22 @@ import XCTest
 
 class ClosureContentLoadingControllerDelegate : ContentLoadingControllerDelegate {
 
-    var willBeginLoading: ((controller: ContentLoadingController) -> Void)?
-    var didFinishLoadingWithUpdate: ((controller: ContentLoadingController, update: () -> Void) -> Void)?
+    var willBeginLoading: ((_ controller: ContentLoadingController) -> Void)?
+    var didFinishLoadingWithUpdate: ((_ controller: ContentLoadingController, _ update: () -> Void) -> Void)?
 
-    init(willBeginLoading: ((controller: ContentLoadingController) -> Void)? = nil,
-        didFinishLoadingWithUpdate: ((controller: ContentLoadingController, update: () -> Void) -> Void)? = nil)
+    init(willBeginLoading: ((_ controller: ContentLoadingController) -> Void)? = nil,
+        didFinishLoadingWithUpdate: ((_ controller: ContentLoadingController, _ update: () -> Void) -> Void)? = nil)
     {
         self.willBeginLoading = willBeginLoading
         self.didFinishLoadingWithUpdate = didFinishLoadingWithUpdate
     }
 
     func contentLoadingControllerWillBeginLoading(_ controller: ContentLoadingController) {
-        willBeginLoading?(controller: controller)
+        willBeginLoading?(controller)
     }
     
-    func contentLoadingController(_ controller: ContentLoadingController, didFinishLoadingWithUpdate update: () -> Void) {
-        didFinishLoadingWithUpdate?(controller: controller, update: update)
+    func contentLoadingController(_ controller: ContentLoadingController, didFinishLoadingWithUpdate update: @escaping () -> Void) {
+        didFinishLoadingWithUpdate?(controller, update)
     }
 }
 

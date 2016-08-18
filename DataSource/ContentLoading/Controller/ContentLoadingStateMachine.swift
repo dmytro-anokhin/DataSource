@@ -9,9 +9,9 @@
 
 public class ContentLoadingStateMachine {
 
-    public var willTransition: ((to: ContentLoadingState) -> Void)?
+    public var willTransition: ((_ to: ContentLoadingState) -> Void)?
     
-    public var didTransition: ((from: ContentLoadingState) -> Void)?
+    public var didTransition: ((_ from: ContentLoadingState) -> Void)?
     
     public enum Error: Swift.Error {
         case illegalStateTransition(from: ContentLoadingState, to: ContentLoadingState)
@@ -68,13 +68,13 @@ public class ContentLoadingStateMachine {
                 return
             }
 
-            willTransition?(to: to)
+            willTransition?(to)
             
             lock.lock()
             _currentState = to
             lock.unlock()
             
-            didTransition?(from: from)
+            didTransition?(from)
         }
     }
     

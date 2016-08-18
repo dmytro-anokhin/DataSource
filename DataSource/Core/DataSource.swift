@@ -11,7 +11,7 @@
 
     Base class implements updates functionality.
 */
-public class DataSource : NSObject, UpdateObservable {
+open class DataSource : NSObject, UpdateObservable {
 
     /** Computed property that determines if update should be postponed for future.
 

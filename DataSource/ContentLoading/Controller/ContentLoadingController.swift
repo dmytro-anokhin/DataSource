@@ -11,10 +11,12 @@ public protocol ContentLoadingControllerDelegate : class {
 
     func contentLoadingControllerWillBeginLoading(_ controller: ContentLoadingController)
     
-    func contentLoadingController(_ controller: ContentLoadingController, didFinishLoadingWithUpdate update: () -> Void)
+    func contentLoadingController(_ controller: ContentLoadingController, didFinishLoadingWithUpdate update: @escaping () -> Void)
 }
 
 
+/** The `ContentLoadingController` provides API for loading content. This class manages loading process, encapsulates state transitions and stores an error.
+*/
 public class ContentLoadingController {
 
     // MARK: - Public
@@ -31,7 +33,14 @@ public class ContentLoadingController {
 
     public private(set) var loadingError: NSError?
     
-    public func loadContent(_ closure: (coordinator: ContentLoadingCoordinator) -> Void) {
+    /** The `loadContent(_:)` is a principal content loading method.
+    
+        The method accepts closure with `ContentLoadingCoordinator` argument. The closure encapsulates work required to load content (network interaction, database query, reading from disk, etc.). It is a clients responsibility to implement this work.
+        On completion, client must signal the `ContentLoadingCoordinator` that work is done.
+        
+        - Parameter closure: closure that encapsulates content loading work.
+    */
+    public func loadContent(_ closure: (_ coordinator: ContentLoadingCoordinator) -> Void) {
     
         assertMainThread()
     
@@ -48,7 +57,7 @@ public class ContentLoadingController {
         }
         
         // Execute loading closure
-        closure(coordinator: currentLoadingCoordinator!)
+        closure(currentLoadingCoordinator!)
     }
     
     // MARK: - Private
@@ -74,7 +83,7 @@ public class ContentLoadingController {
         delegate?.contentLoadingControllerWillBeginLoading(self)
     }
     
-    private func endLoading(_ state: ContentLoadingState, error: NSError?, update: () -> Void) {
+    private func endLoading(_ state: ContentLoadingState, error: NSError?, update: @escaping () -> Void) {
         
         assertMainThread()
 

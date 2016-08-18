@@ -119,7 +119,7 @@ public class TableViewComposedDataSource : DataSource, Composable, TableViewData
     
         let mapping = composition.mapping(for: dataSource)
         
-        notifyUpdate(structureUpdate.dynamicType.init(type: structureUpdate.type, animation: structureUpdate.animation,
+        notifyUpdate(type(of: structureUpdate).init(type: structureUpdate.type, animation: structureUpdate.animation,
             indexPaths: {
                 guard let indexPaths = structureUpdate.indexPaths else { return nil }
                 // Map local index paths to global

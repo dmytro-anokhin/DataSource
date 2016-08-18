@@ -12,21 +12,21 @@
 /// The `ClosureContentLoadingObserver` encapsulates `ContentLoadingObserver` callbacks in closures.
 class ClosureContentLoadingObserver : ContentLoadingObserver {
 
-    var willLoadContent: ((sender: ContentLoadingObservable) -> Void)?
-    var didLoadContent: ((sender: ContentLoadingObservable, error: NSError?) -> Void)?
+    var willLoadContent: ((_ sender: ContentLoadingObservable) -> Void)?
+    var didLoadContent: ((_ sender: ContentLoadingObservable, _ error: NSError?) -> Void)?
     
-    init(willLoadContent: ((sender: ContentLoadingObservable) -> Void)? = nil,
-        didLoadContent: ((sender: ContentLoadingObservable, error: NSError?) -> Void)? = nil)
+    init(willLoadContent: ((_ sender: ContentLoadingObservable) -> Void)? = nil,
+        didLoadContent: ((_ sender: ContentLoadingObservable, _ error: NSError?) -> Void)? = nil)
     {
         self.willLoadContent = willLoadContent
         self.didLoadContent = didLoadContent
     }
 
     func willLoadContent(_ sender: ContentLoadingObservable) {
-        willLoadContent?(sender: sender)
+        willLoadContent?(sender)
     }
     
     func didLoadContent(_ sender: ContentLoadingObservable, with error: NSError?) {
-        didLoadContent?(sender: sender, error: error)
+        didLoadContent?(sender, error)
     }
 }

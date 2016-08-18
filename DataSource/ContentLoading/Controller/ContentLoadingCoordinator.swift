@@ -56,7 +56,7 @@ public class ContentLoadingCoordinator {
     
     // MARK: - Internal
     
-    typealias CompletionHandler = (state: ContentLoadingState?, error: NSError?, update: Update?) -> Void
+    typealias CompletionHandler = (_ state: ContentLoadingState?, _ error: NSError?, _ update: Update?) -> Void
     
     init(completion: CompletionHandler) {
         self.completion = completion
@@ -76,7 +76,7 @@ public class ContentLoadingCoordinator {
             self.completion = nil
             
             DispatchQueue.main.async { () -> Void in
-                completion(state: state, error: error, update: update)
+                completion(state, error, update)
             }
         }
     }

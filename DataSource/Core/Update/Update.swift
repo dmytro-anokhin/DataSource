@@ -27,7 +27,7 @@ public class Update {
         return BatchUpdate(updates: updates)
     }
     
-    public class func arbitraryUpdate(_ closure: () -> Void) -> Update {
+    public class func arbitraryUpdate(_ closure: @escaping () -> Void) -> Update {
         return ArbitraryUpdate(closure: closure)
     }
 }
@@ -37,7 +37,7 @@ public class ArbitraryUpdate: Update {
     
     public let closure: () -> Void
     
-    public init(closure: () -> Void) {
+    public init(closure: @escaping () -> Void) {
         self.closure = closure
     }
     

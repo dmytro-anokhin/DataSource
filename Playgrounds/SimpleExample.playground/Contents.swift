@@ -5,7 +5,7 @@ import PlaygroundSupport
 import DataSource
 
 
-class AnimalsDataSource: TableViewDataSource {
+class AnimalsDataSource : TableViewDataSource {
 
     private var animals = [ "Cheetah", "Puma", "Jaguar" ]
 

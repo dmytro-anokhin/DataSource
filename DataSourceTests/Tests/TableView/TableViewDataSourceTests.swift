@@ -31,7 +31,7 @@ class EventsDataSource : TableViewDataSource, TableViewReusableViewsRegistering 
     override func loadContent() {
         contentLoadingController.loadContent { coordinator in
             DispatchQueue.global().async {
-                guard let path = Bundle(for: self.dynamicType).path(forResource: self.fileName, ofType: "plist"),
+                guard let path = Bundle(for: type(of: self)).path(forResource: self.fileName, ofType: "plist"),
                       let array = NSArray(contentsOfFile: path)
                 else {
                     coordinator.done(withError: NSError(domain: "EventsDataSourceErrorDomain", code: 0))
@@ -121,7 +121,7 @@ class ShopsDataSource : TableViewDataSource, IndexPathIndexable, TableViewReusab
     override func loadContent() {
         contentLoadingController.loadContent { coordinator in
             DispatchQueue.global().async {
-                guard let path = Bundle(for: self.dynamicType).path(forResource: self.fileName, ofType: "plist"),
+                guard let path = Bundle(for: type(of: self)).path(forResource: self.fileName, ofType: "plist"),
                       let array = NSArray(contentsOfFile: path)
                 else {
                     coordinator.done(withError: NSError(domain: "ShopsDataSourceErrorDomain", code: 0))
