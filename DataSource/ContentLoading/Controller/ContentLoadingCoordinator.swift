@@ -11,7 +11,7 @@
 
     The `ContentLoadingCoordinator` can receive signals from any thread. State transition is notified on the main queue.
 */
-public class ContentLoadingCoordinator {
+public final class ContentLoadingCoordinator {
     
     // MARK: - Public
     

@@ -17,7 +17,7 @@ public protocol ContentLoadingControllerDelegate : class {
 
 /** The `ContentLoadingController` provides API for loading content. This class manages loading process, encapsulates state transitions and stores an error.
 */
-public class ContentLoadingController {
+public final class ContentLoadingController {
 
     // MARK: - Public
 

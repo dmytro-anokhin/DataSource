@@ -7,7 +7,7 @@
 //
 
 
-public class ContentLoadingStateMachine {
+public final class ContentLoadingStateMachine {
 
     public var willTransition: ((_ to: ContentLoadingState) -> Void)?
     
