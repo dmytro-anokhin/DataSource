@@ -6,7 +6,7 @@
 //
 
 
-public class TableViewComposedDataSource : DataSource, Composable, TableViewDataSourceType,
+open class TableViewComposedDataSource : DataSource, Composable, TableViewDataSourceType,
     IndexPathIndexable, TableViewReusableViewsRegistering, ContentLoading,
     UpdateObserver, ContentLoadingObserver, ContentLoadingObservable {
     
@@ -15,7 +15,7 @@ public class TableViewComposedDataSource : DataSource, Composable, TableViewData
     public typealias Child = TableViewDataSourceType
 
     @discardableResult
-    public func add(_ dataSource: Child) -> Bool {
+    public final func add(_ dataSource: Child) -> Bool {
     
         assertMainThread()
 
@@ -35,7 +35,7 @@ public class TableViewComposedDataSource : DataSource, Composable, TableViewData
     }
     
     @discardableResult
-    public func remove(_ dataSource: Child)  -> Bool {
+    public final func remove(_ dataSource: Child)  -> Bool {
     
         assertMainThread()
         
@@ -54,7 +54,7 @@ public class TableViewComposedDataSource : DataSource, Composable, TableViewData
         return true
     }
     
-    public var children: [Child] {
+    public final var children: [Child] {
         return composition.children
     }
     
@@ -62,14 +62,14 @@ public class TableViewComposedDataSource : DataSource, Composable, TableViewData
 
     private var _numberOfSections: Int = 0
     
-    public var numberOfSections: Int {
+    public final var numberOfSections: Int {
         _numberOfSections = composition.updateMappings()
         return _numberOfSections
     }
     
     // MARK: - IndexPathIndexable
     
-    public func object(at indexPath: IndexPath) -> Any? {
+    public final func object(at indexPath: IndexPath) -> Any? {
         
         guard let mapping = composition.mapping(for: indexPath.section),
               let localIndexPath = mapping.localIndexPath(for: indexPath)
@@ -80,7 +80,7 @@ public class TableViewComposedDataSource : DataSource, Composable, TableViewData
         return (mapping.dataSource as? IndexPathIndexable)?.object(at: localIndexPath)
     }
     
-    public func indexPaths(for object: Any) -> [IndexPath] {
+    public final func indexPaths(for object: Any) -> [IndexPath] {
         
         return children.reduce([]) { indexPaths, dataSource in
             let mapping = composition.mapping(for: dataSource)
@@ -96,7 +96,7 @@ public class TableViewComposedDataSource : DataSource, Composable, TableViewData
 
     // MARK: - UpdateObserver
     
-    public func perform(update: Update, from sender: UpdateObservable) {
+    public final func perform(update: Update, from sender: UpdateObservable) {
         
         guard let dataSource = sender as? TableViewDataSourceType else { return }
         
@@ -188,7 +188,7 @@ public class TableViewComposedDataSource : DataSource, Composable, TableViewData
     
     // required
     
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public final func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
         _numberOfSections = composition.updateMappings()
         
@@ -196,7 +196,7 @@ public class TableViewComposedDataSource : DataSource, Composable, TableViewData
         return local.dataSource.tableView(local.tableView, numberOfRowsInSection: local.section)
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public final func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let local = composition.local(forIndexPath: indexPath, in: tableView)
         return local.dataSource.tableView(local.tableView, cellForRowAt: local.indexPath)
@@ -204,7 +204,7 @@ public class TableViewComposedDataSource : DataSource, Composable, TableViewData
     
     // optional
     
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    public final func numberOfSections(in tableView: UITableView) -> Int {
         return numberOfSections
     }
     

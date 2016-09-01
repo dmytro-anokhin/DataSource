@@ -13,11 +13,13 @@
 */
 open class DataSource : NSObject, UpdateObservable {
 
-    /** Computed property that determines if update should be postponed for future.
+    /** Computed property that determines if an update should be postponed for future.
 
         Common reason for delaying an update is content loading process. If update is notified when loading is in progress, such update is postponed till loading completes.
+
+        Base implementation returns true if the data source is loading content.
     */
-    public var shouldPostponeUpdate: Bool {
+    open var shouldPostponeUpdate: Bool {
         
         if let contentLoading = self as? ContentLoading {
             return contentLoading.loadingState.isLoading
@@ -52,7 +54,7 @@ open class DataSource : NSObject, UpdateObservable {
 
     public weak var updateObserver: UpdateObserver?
 
-    public func notifyUpdate(_ update: Update) {
+    public final func notifyUpdate(_ update: Update) {
 
         assertMainThread()
 
