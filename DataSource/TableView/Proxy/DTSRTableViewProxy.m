@@ -1,46 +1,40 @@
 //
-//  ComposedTableViewMappingWrapper.m
+//  DTSRTableViewProxy.m
+//  DataSource
 //
-//  Created by Dmytro Anokhin on 25/06/15.
-//  Copyright © 2015 danokhin. All rights reserved.
+//  Created by Dmytro Anokhin on 04/09/16.
+//  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
-#import "ComposedTableViewMappingWrapper.h"
+#import "DTSRTableViewProxy.h"
 
-#import "DataSource/DataSource-Swift.h"
-#import <objc/runtime.h>
+@import ObjectiveC.runtime;
 
 
-@implementation ComposedTableViewMappingWrapper
+@implementation DTSRTableViewProxy
 
-+ (nonnull UITableView *)wrapperForTableView:(nonnull UITableView *)tableView mapping:(nonnull ComposedTableViewMapping *)mapping
++ (UITableView *)proxyWithTableView:(UITableView *)tableView mapping:(TableViewSectionMapping *)mapping
 {
-    return [[self alloc] initWithView:tableView mapping:mapping];
+    return [[self alloc] initWithTableView:tableView mapping:mapping];
 }
 
-- (UITableView *)tableView
-{
-    return self.wrappedView;
-}
-
-- (nullable instancetype)initWithView:(nonnull UITableView *)view mapping:(nonnull ComposedTableViewMapping *)mapping
+- (instancetype)initWithTableView:(UITableView *)tableView mapping:(TableViewSectionMapping *)mapping
 {
     self = [super init];
-    if (!self) {
+    if (nil == self)
         return nil;
-    }
     
-    _wrappedView = view;
+    _tableView = tableView;
     _mapping = mapping;
     
     return self;
 }
 
-#pragma mark - Forwarding to internal representation
+#pragma mark - Forwarding
 
 - (id)forwardingTargetForSelector:(SEL)aSelector
 {
-    return _wrappedView;
+    return _tableView;
 }
 
 + (NSMethodSignature *)instanceMethodSignatureForSelector:(SEL)selector
@@ -49,7 +43,7 @@
     if (signature)
         return signature;
 
-    return [[UITableView class] instanceMethodSignatureForSelector:selector];
+    return [UITableView instanceMethodSignatureForSelector:selector];
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
@@ -82,12 +76,12 @@
 
 - (id)valueForUndefinedKey:(NSString *)key
 {
-    return [_wrappedView valueForKey:key];
+    return [_tableView valueForKey:key];
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    [_wrappedView setValue:value forKey:key];
+    [_tableView setValue:value forKey:key];
 }
 
 @end

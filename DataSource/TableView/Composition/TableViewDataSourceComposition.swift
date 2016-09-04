@@ -7,6 +7,7 @@
 //
 
 
+/// The `TableViewDataSourceComposition` implements the composition of a table view data source objects.
 class TableViewDataSourceComposition : Composable {
     
     // MARK: - Composable
@@ -20,7 +21,7 @@ class TableViewDataSourceComposition : Composable {
             return false
         }
     
-        let mapping = ComposedTableViewMapping(dataSource: dataSource)
+        let mapping = TableViewSectionMapping(dataSource: dataSource)
         mappings.append(mapping)
         dataSourceToMappings.setObject(mapping, forKey: dataSource)
         
@@ -48,12 +49,12 @@ class TableViewDataSourceComposition : Composable {
     
     // MARK: - General
     
-    private(set) var mappings: [ComposedTableViewMapping] = []
+    private(set) var mappings: [TableViewSectionMapping] = []
     
-    private(set) var dataSourceToMappings = NSMapTable<AnyObject, ComposedTableViewMapping>(
+    private(set) var dataSourceToMappings = NSMapTable<AnyObject, TableViewSectionMapping>(
         keyOptions: .objectPointerPersonality, valueOptions: NSPointerFunctions.Options(), capacity: 1)
 
-    private(set) var globalSectionToMappings: [Int: ComposedTableViewMapping] = [:]
+    private(set) var globalSectionToMappings: [Int: TableViewSectionMapping] = [:]
     
     /// Updates map of table view sections to data sources. Returns number of global sections.
     func updateMappings() -> Int {
@@ -97,11 +98,11 @@ class TableViewDataSourceComposition : Composable {
         return mapping(for: globalIndexPath.section)?.localIndexPath(for: globalIndexPath)
     }
     
-    func mapping(for section: Int) -> ComposedTableViewMapping? {
+    func mapping(for section: Int) -> TableViewSectionMapping? {
         return globalSectionToMappings[section]
     }
 
-    func mapping(for dataSource: Child) -> ComposedTableViewMapping {
+    func mapping(for dataSource: Child) -> TableViewSectionMapping {
     
         guard let mapping = dataSourceToMappings.object(forKey: dataSource) else {
             fatalError("Mapping for data source not found: \(dataSource)")
@@ -134,7 +135,7 @@ class TableViewDataSourceComposition : Composable {
             fatalError("Local section for section not found: \(section)")
         }
         
-        let wrapper = ComposedTableViewWrapper.wrapper(for: tableView, mapping: mapping)
+        let wrapper = TableViewCompositionProxy.proxy(with: tableView, mapping: mapping)
         let dataSource = mapping.dataSource
         
         return (dataSource, wrapper, localSection)
@@ -151,7 +152,7 @@ class TableViewDataSourceComposition : Composable {
             fatalError("Local index path for index path not found: \(indexPath)")
         }
         
-        let wrapper = ComposedTableViewWrapper.wrapper(for: tableView, mapping: mapping)
+        let wrapper = TableViewCompositionProxy.proxy(with: tableView, mapping: mapping)
         let dataSource = mapping.dataSource
         
         return (dataSource, wrapper, localIndexPath)

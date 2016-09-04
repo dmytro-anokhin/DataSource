@@ -1,14 +1,15 @@
 //
-//  ComposedTableViewWrapper.swift
+//  TableViewCompositionProxy.swift
+//  DataSource
 //
-//  Created by Dmytro Anokhin on 24/06/15.
-//  Copyright © 2015 danokhin. All rights reserved.
+//  Created by Dmytro Anokhin on 04/09/16.
+//  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
+import UIKit
 
-// TODO: Use Swift 3.0 syntax or move back to Objective-C
 
-class ComposedTableViewWrapper: ComposedTableViewMappingWrapper {
+class TableViewCompositionProxy : DTSRTableViewProxy {
 
     // MARK: - UITableView methods that work with sections or index paths
 

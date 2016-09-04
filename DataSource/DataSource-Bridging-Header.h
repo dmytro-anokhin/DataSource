@@ -6,5 +6,4 @@
 //
 
 
-// TODO: Why "ComposedTableViewMappingWrapper.h" not working?
-#import "TableView/Private/ComposedTableViewMappingWrapper.h"
+#import "DTSRTableViewProxy.h"

@@ -1,13 +1,16 @@
 //
-//  ComposedTableViewMapping.swift
+//  TableViewSectionMapping.swift
+//  DataSource
 //
-//  Created by Dmytro Anokhin on 24/06/15.
-//  Copyright © 2015 danokhin. All rights reserved.
+//  Created by Dmytro Anokhin on 04/09/16.
+//  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
+
+import UIKit
 
 
 /// Maps global sections to local sections for a given data source
-class ComposedTableViewMapping: NSObject {
+final class TableViewSectionMapping {
 
     /// The data source associated with this mapping
     let dataSource: TableViewDataSourceType

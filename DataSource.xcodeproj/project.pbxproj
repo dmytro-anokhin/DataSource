@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		F413BD591D5F060200779E84 /* ContentLoadingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F413BD581D5F060200779E84 /* ContentLoadingControllerTests.swift */; };
-		F416918E1D5AA93D0096AC90 /* TableViewDataSourceComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F416918D1D5AA93D0096AC90 /* TableViewDataSourceComposition.swift */; };
 		F422D9C71CB3111400576C5A /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422D9B71CB3111400576C5A /* Helpers.swift */; };
-		F422D9DC1CB3114C00576C5A /* ComposedTableViewMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422D9D21CB3114C00576C5A /* ComposedTableViewMapping.swift */; };
-		F422D9DE1CB3114C00576C5A /* ComposedTableViewMappingWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F422D9D41CB3114C00576C5A /* ComposedTableViewMappingWrapper.h */; };
-		F422D9DF1CB3114C00576C5A /* ComposedTableViewMappingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = F422D9D51CB3114C00576C5A /* ComposedTableViewMappingWrapper.m */; };
-		F422D9E01CB3114C00576C5A /* ComposedTableViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422D9D61CB3114C00576C5A /* ComposedTableViewWrapper.swift */; };
 		F422D9E11CB3114C00576C5A /* TableViewComposedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422D9D81CB3114C00576C5A /* TableViewComposedDataSource.swift */; };
 		F422D9E31CB3114C00576C5A /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422D9DA1CB3114C00576C5A /* TableViewDataSource.swift */; };
 		F422D9E41CB3114C00576C5A /* TableViewUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422D9DB1CB3114C00576C5A /* TableViewUpdate.swift */; };
 		F422D9E61CB311BB00576C5A /* DataSource-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = F422D9E51CB311BB00576C5A /* DataSource-Bridging-Header.h */; };
 		F4467D071B63C6A400CDBA9C /* DataSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4467CFC1B63C6A400CDBA9C /* DataSource.framework */; };
+		F455303E1D7BC66B00DADBBC /* DTSRTableViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = F455303C1D7BC66B00DADBBC /* DTSRTableViewProxy.h */; };
+		F455303F1D7BC66B00DADBBC /* DTSRTableViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F455303D1D7BC66B00DADBBC /* DTSRTableViewProxy.m */; };
+		F45530421D7BC6FA00DADBBC /* TableViewDataSourceComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45530411D7BC6FA00DADBBC /* TableViewDataSourceComposition.swift */; };
+		F45530441D7BC7CC00DADBBC /* TableViewSectionMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45530431D7BC7CC00DADBBC /* TableViewSectionMapping.swift */; };
+		F45530461D7BC85700DADBBC /* TableViewCompositionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45530451D7BC85700DADBBC /* TableViewCompositionProxy.swift */; };
 		F470936A1D46001D00BE7525 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47093621D46001D00BE7525 /* TestHelpers.swift */; };
 		F470936B1D46001D00BE7525 /* Events.plist in Resources */ = {isa = PBXBuildFile; fileRef = F47093641D46001D00BE7525 /* Events.plist */; };
 		F470936C1D46001D00BE7525 /* Shops.plist in Resources */ = {isa = PBXBuildFile; fileRef = F47093651D46001D00BE7525 /* Shops.plist */; };
@@ -62,12 +62,7 @@
 /* Begin PBXFileReference section */
 		F40C9C8C1D48A2BD00457C1E /* StaticCellsPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = StaticCellsPlayground.playground; sourceTree = "<group>"; };
 		F413BD581D5F060200779E84 /* ContentLoadingControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingControllerTests.swift; sourceTree = "<group>"; };
-		F416918D1D5AA93D0096AC90 /* TableViewDataSourceComposition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceComposition.swift; sourceTree = "<group>"; };
 		F422D9B71CB3111400576C5A /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		F422D9D21CB3114C00576C5A /* ComposedTableViewMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposedTableViewMapping.swift; sourceTree = "<group>"; };
-		F422D9D41CB3114C00576C5A /* ComposedTableViewMappingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposedTableViewMappingWrapper.h; sourceTree = "<group>"; };
-		F422D9D51CB3114C00576C5A /* ComposedTableViewMappingWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposedTableViewMappingWrapper.m; sourceTree = "<group>"; };
-		F422D9D61CB3114C00576C5A /* ComposedTableViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposedTableViewWrapper.swift; sourceTree = "<group>"; };
 		F422D9D81CB3114C00576C5A /* TableViewComposedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewComposedDataSource.swift; sourceTree = "<group>"; };
 		F422D9DA1CB3114C00576C5A /* TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
 		F422D9DB1CB3114C00576C5A /* TableViewUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewUpdate.swift; sourceTree = "<group>"; };
@@ -79,6 +74,11 @@
 		F4467D011B63C6A400CDBA9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4467D061B63C6A400CDBA9C /* DataSourceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataSourceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4467D0D1B63C6A400CDBA9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F455303C1D7BC66B00DADBBC /* DTSRTableViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSRTableViewProxy.h; sourceTree = "<group>"; };
+		F455303D1D7BC66B00DADBBC /* DTSRTableViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTSRTableViewProxy.m; sourceTree = "<group>"; };
+		F45530411D7BC6FA00DADBBC /* TableViewDataSourceComposition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceComposition.swift; sourceTree = "<group>"; };
+		F45530431D7BC7CC00DADBBC /* TableViewSectionMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionMapping.swift; sourceTree = "<group>"; };
+		F45530451D7BC85700DADBBC /* TableViewCompositionProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCompositionProxy.swift; sourceTree = "<group>"; };
 		F47093621D46001D00BE7525 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F47093641D46001D00BE7525 /* Events.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Events.plist; sourceTree = "<group>"; };
 		F47093651D46001D00BE7525 /* Shops.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Shops.plist; sourceTree = "<group>"; };
@@ -154,22 +154,11 @@
 		F422D9B81CB3111400576C5A /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				F45530401D7BC6EA00DADBBC /* Composition */,
+				F455303B1D7BC66B00DADBBC /* Proxy */,
 				F422D9D71CB3114C00576C5A /* Public */,
-				F422D9D11CB3114C00576C5A /* Private */,
 			);
 			path = TableView;
-			sourceTree = "<group>";
-		};
-		F422D9D11CB3114C00576C5A /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				F422D9D21CB3114C00576C5A /* ComposedTableViewMapping.swift */,
-				F422D9D41CB3114C00576C5A /* ComposedTableViewMappingWrapper.h */,
-				F422D9D51CB3114C00576C5A /* ComposedTableViewMappingWrapper.m */,
-				F422D9D61CB3114C00576C5A /* ComposedTableViewWrapper.swift */,
-				F416918D1D5AA93D0096AC90 /* TableViewDataSourceComposition.swift */,
-			);
-			path = Private;
 			sourceTree = "<group>";
 		};
 		F422D9D71CB3114C00576C5A /* Public */ = {
@@ -233,6 +222,25 @@
 				F4467D011B63C6A400CDBA9C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F455303B1D7BC66B00DADBBC /* Proxy */ = {
+			isa = PBXGroup;
+			children = (
+				F455303C1D7BC66B00DADBBC /* DTSRTableViewProxy.h */,
+				F455303D1D7BC66B00DADBBC /* DTSRTableViewProxy.m */,
+			);
+			path = Proxy;
+			sourceTree = "<group>";
+		};
+		F45530401D7BC6EA00DADBBC /* Composition */ = {
+			isa = PBXGroup;
+			children = (
+				F45530411D7BC6FA00DADBBC /* TableViewDataSourceComposition.swift */,
+				F45530431D7BC7CC00DADBBC /* TableViewSectionMapping.swift */,
+				F45530451D7BC85700DADBBC /* TableViewCompositionProxy.swift */,
+			);
+			path = Composition;
 			sourceTree = "<group>";
 		};
 		F47093611D46001D00BE7525 /* Common */ = {
@@ -358,8 +366,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F455303E1D7BC66B00DADBBC /* DTSRTableViewProxy.h in Headers */,
 				F422D9E61CB311BB00576C5A /* DataSource-Bridging-Header.h in Headers */,
-				F422D9DE1CB3114C00576C5A /* ComposedTableViewMappingWrapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +416,7 @@
 		F4467CF31B63C6A400CDBA9C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = DTSR;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Dmytro Anokhin";
@@ -466,26 +475,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4E164EB1D53B20A00454A17 /* Composable.swift in Sources */,
+				F45530421D7BC6FA00DADBBC /* TableViewDataSourceComposition.swift in Sources */,
 				F422D9E11CB3114C00576C5A /* TableViewComposedDataSource.swift in Sources */,
 				F422D9E41CB3114C00576C5A /* TableViewUpdate.swift in Sources */,
-				F422D9DF1CB3114C00576C5A /* ComposedTableViewMappingWrapper.m in Sources */,
 				F47D43A41D4F96F20064885E /* IndexPathIndexable.swift in Sources */,
-				F422D9E01CB3114C00576C5A /* ComposedTableViewWrapper.swift in Sources */,
 				F4CD277E1D4A005100C24E04 /* UpdateObserver.swift in Sources */,
 				F4CD27B51D4B42BA00C24E04 /* TableViewReusableViewsRegistering.swift in Sources */,
 				F4B416FB1D3E5D4A005E8BFC /* TableViewDataSourceType.swift in Sources */,
-				F416918E1D5AA93D0096AC90 /* TableViewDataSourceComposition.swift in Sources */,
 				F491707C1D5A8E2B004B360B /* ContentLoadingDataSource.swift in Sources */,
 				F422D9E31CB3114C00576C5A /* TableViewDataSource.swift in Sources */,
-				F422D9DC1CB3114C00576C5A /* ComposedTableViewMapping.swift in Sources */,
 				F4A949EE1D58DA6D00D1F23B /* ContentLoadingStateMachine.swift in Sources */,
 				F4CD276F1D49FC1B00C24E04 /* ContentLoading.swift in Sources */,
 				F4CD27801D4A00F200C24E04 /* ContentLoadingObserver.swift in Sources */,
+				F45530441D7BC7CC00DADBBC /* TableViewSectionMapping.swift in Sources */,
 				F4A949F01D58EB0D00D1F23B /* ContentLoadingCoordinator.swift in Sources */,
 				F4CD277C1D4A000300C24E04 /* Update.swift in Sources */,
 				F4A949ED1D58DA6D00D1F23B /* ContentLoadingController.swift in Sources */,
 				F4B416F71D3E1F67005E8BFC /* MemoryWarningHandling.swift in Sources */,
 				F4FB9D721D59C54400AD5ED8 /* DataSource.swift in Sources */,
+				F455303F1D7BC66B00DADBBC /* DTSRTableViewProxy.m in Sources */,
+				F45530461D7BC85700DADBBC /* TableViewCompositionProxy.swift in Sources */,
 				F422D9C71CB3111400576C5A /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
