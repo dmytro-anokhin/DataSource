@@ -135,7 +135,7 @@ class TableViewDataSourceComposition : Composable {
             fatalError("Local section for section not found: \(section)")
         }
         
-        let wrapper = TableViewCompositionProxy.proxy(with: tableView, mapping: mapping)
+        let wrapper = TableViewProxy.proxy(with: tableView, mapping: mapping)
         let dataSource = mapping.dataSource
         
         return (dataSource, wrapper, localSection)
@@ -152,7 +152,7 @@ class TableViewDataSourceComposition : Composable {
             fatalError("Local index path for index path not found: \(indexPath)")
         }
         
-        let wrapper = TableViewCompositionProxy.proxy(with: tableView, mapping: mapping)
+        let wrapper = TableViewProxy.proxy(with: tableView, mapping: mapping)
         let dataSource = mapping.dataSource
         
         return (dataSource, wrapper, localIndexPath)

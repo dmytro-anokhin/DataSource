@@ -1,5 +1,5 @@
 //
-//  TableViewCompositionProxy.swift
+//  TableViewProxy.swift
 //  DataSource
 //
 //  Created by Dmytro Anokhin on 04/09/16.
@@ -9,7 +9,7 @@
 import UIKit
 
 
-class TableViewCompositionProxy : DTSRTableViewProxy {
+class TableViewProxy : DTSRTableViewProxy {
 
     // MARK: - UITableView methods that work with sections or index paths
 

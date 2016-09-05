@@ -9,7 +9,7 @@
 import UIKit
 
 
-/// Maps global sections to local sections for a given data source
+/// The `TableViewSectionMapping` maps global sections of a table view to local sections of a data source (and vice versa).
 final class TableViewSectionMapping {
 
     /// The data source associated with this mapping
