@@ -20,7 +20,7 @@ class TestDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
     
     var sections: [Int] {
         didSet {
-            notifyUpdate(TableViewUpdate.reloadData())
+            notifyUpdate(TableViewReloadDataUpdate())
         }
     }
     

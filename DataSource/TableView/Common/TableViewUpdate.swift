@@ -6,6 +6,7 @@
 //  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
+/*
 
 // TODO: Rename in insert(sections:) insert(rows:)
 
@@ -84,13 +85,13 @@ public class TableViewReloadDataUpdate: TableViewUpdate {
 
 public class TableViewStructureUpdate: TableViewUpdate, AnimatedUpdate {
     
-    public let type: UpdateType
+    public let type: UpdateKind
     
     public let animation: UITableViewRowAnimation
     
     public var animated: Bool { return animation != .none }
     
-    public required init(type: UpdateType, animation: UITableViewRowAnimation = .none,
+    public required init(type: UpdateKind, animation: UITableViewRowAnimation = .none,
         indexPaths: [IndexPath]? = nil, newIndexPaths: [IndexPath]? = nil,
         sections: IndexSet? = nil, newSections: IndexSet? = nil)
     {
@@ -190,8 +191,10 @@ public class TableViewBatchUpdate: BatchUpdate {
     }
     
     private func internalPerform(_ tableView: UITableView) {
-        for update in updates {
+        for update in children {
             update.perform(tableView)
         }
     }
 }
+
+*/

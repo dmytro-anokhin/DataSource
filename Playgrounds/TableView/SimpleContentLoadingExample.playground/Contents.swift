@@ -29,7 +29,7 @@ class AnimalsDataSource : TableViewDataSource {
             
             DispatchQueue.main.async {
                 self.animals = animals
-                self.notifyUpdate(TableViewUpdate.reloadData())
+                self.notifyUpdate(TableViewReloadDataUpdate())
             }
         }
     }
@@ -57,7 +57,7 @@ class TableViewController: UIViewController, UpdateObserver {
         tableView.dataSource = dataSource
     }
     
-    func perform(update: Update, from sender: UpdateObservable) {
+    func perform(update: UpdateType, from sender: UpdateObservable) {
         update.perform(tableView)
     }
 }

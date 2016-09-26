@@ -12,12 +12,12 @@ public protocol UpdateObservable : class {
     
     weak var updateObserver: UpdateObserver? { get set }
     
-    func notifyUpdate(_ update: Update)
+    func notifyUpdate(_ update: UpdateType)
 }
 
 
 /// The `UpdateObserver` protocol defines interface of delegate for updates.
 public protocol UpdateObserver : class {
 
-    func perform(update: Update, from sender: UpdateObservable)
+    func perform(update: UpdateType, from sender: UpdateObservable)
 }

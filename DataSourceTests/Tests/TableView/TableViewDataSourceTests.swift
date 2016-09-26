@@ -56,7 +56,7 @@ class EventsDataSource : TableViewDataSource, TableViewReusableViewsRegistering 
                 coordinator.done { [weak self] in
                     guard let me = self else { return }
                     me.events = events
-                    me.notifyUpdate(TableViewUpdate.reloadData())
+                    me.notifyUpdate(TableViewReloadDataUpdate())
                 }
             }
         }
@@ -146,7 +146,7 @@ class ShopsDataSource : TableViewDataSource, IndexPathIndexable, TableViewReusab
                 coordinator.done { [weak self] in
                     guard let me = self else { return }
                     me.shops = shops
-                    me.notifyUpdate(TableViewUpdate.reloadData())
+                    me.notifyUpdate(TableViewReloadDataUpdate())
                 }
             }
         }
@@ -193,7 +193,7 @@ class ViewController : UpdateObserver, ContentLoadingObserver {
     var willLoadContentExpectation: XCTestExpectation?
     var didLoadContentExpectation: XCTestExpectation?
     
-    func perform(update: Update, from sender: UpdateObservable) {
+    func perform(update: UpdateType, from sender: UpdateObservable) {
         update.perform(tableView)
     }
 

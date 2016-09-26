@@ -49,12 +49,12 @@ class TableViewDataSourceComposition : Composable {
     
     // MARK: - General
     
-    private(set) var mappings: [TableViewSectionMapping] = []
+    private var mappings: [TableViewSectionMapping] = []
     
-    private(set) var dataSourceToMappings = NSMapTable<AnyObject, TableViewSectionMapping>(
-        keyOptions: .objectPointerPersonality, valueOptions: NSPointerFunctions.Options(), capacity: 1)
+    private var dataSourceToMappings = NSMapTable<AnyObject, TableViewSectionMapping>(
+        keyOptions: .objectPointerPersonality, valueOptions: NSPointerFunctions.Options(), capacity: 0)
 
-    private(set) var globalSectionToMappings: [Int: TableViewSectionMapping] = [:]
+    private var globalSectionToMappings: [Int: TableViewSectionMapping] = [:]
     
     /// Updates map of table view sections to data sources. Returns number of global sections.
     func updateMappings() -> Int {
@@ -118,6 +118,7 @@ class TableViewDataSourceComposition : Composable {
     }
     
     func globalIndexPaths(for localIndexPaths: [IndexPath], in dataSource: Child) -> [IndexPath] {
+    
         let mapping = self.mapping(for: dataSource)
         return localIndexPaths.flatMap { mapping.globalIndexPath(for: $0) }
     }

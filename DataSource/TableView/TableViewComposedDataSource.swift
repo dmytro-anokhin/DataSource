@@ -29,7 +29,8 @@ open class TableViewComposedDataSource : DataSource, Composable, TableViewDataSo
         _numberOfSections = composition.updateMappings()
         
         let sections = composition.sections(for: dataSource)
-        notifyUpdate(TableViewUpdate.insertSections(sections))
+        let update = TableViewSectionsUpdate(insert: sections)
+        notifyUpdate(update)
         
         return true
     }
@@ -49,7 +50,9 @@ open class TableViewComposedDataSource : DataSource, Composable, TableViewDataSo
         (dataSource as? ContentLoadingObservable)?.contentLoadingObserver = nil
         
         _numberOfSections = composition.updateMappings()
-        notifyUpdate(TableViewUpdate.deleteSections(sections))
+
+        let update = TableViewSectionsUpdate(delete: sections)
+        notifyUpdate(update)
         
         return true
     }
@@ -96,69 +99,94 @@ open class TableViewComposedDataSource : DataSource, Composable, TableViewDataSo
 
     // MARK: - UpdateObserver
     
-    public final func perform(update: Update, from sender: UpdateObservable) {
+    public final func perform(update: UpdateType, from sender: UpdateObservable) {
         
         guard let dataSource = sender as? TableViewDataSourceType else { return }
-        
-        if let _ = update as? TableViewBatchUpdate {
-            _numberOfSections = composition.updateMappings()
-            notifyUpdate(update)
+
+        if let rowsUpdate = update as? TableViewRowsUpdate {
+
+            let mapping = composition.mapping(for: dataSource)
+
+            guard let globalUpdate = TableViewRowsUpdate(
+
+                changeType: rowsUpdate.changeType,
+
+                indexPaths: {
+                    // Map local index paths to global
+                    guard let indexPaths = rowsUpdate.elements else { return nil }
+                    return mapping.globalIndexPaths(for: indexPaths)
+                }(),
+
+                newIndexPaths: {
+                    // Map local index path to global
+                    guard let newIndexPaths = rowsUpdate.newElements else { return nil }
+                    return mapping.globalIndexPaths(for: newIndexPaths)
+                }(),
+
+                animation: rowsUpdate.animation
+            )
+            else {
+                return
+            }
+
+            notifyUpdate(globalUpdate)
             return
         }
-        
-        if let _ = update as? TableViewReloadDataUpdate {
-            _numberOfSections = composition.updateMappings()
-            notifyUpdate(update)
+
+        if let sectionsUpdate = update as? TableViewSectionsUpdate {
+
+            let mapping = composition.mapping(for: dataSource)
+
+            guard let globalUpdate = TableViewSectionsUpdate(
+
+                changeType: sectionsUpdate.changeType,
+
+                sections: {
+
+                    guard let sections = sectionsUpdate.elements else { return nil }
+                    
+                    switch sectionsUpdate.changeType {
+                        case .insert:
+                            // Map local sections to global after mappings update
+                            _numberOfSections = composition.updateMappings()
+                            return composition.globalSections(for: sections, in: dataSource)
+
+                        case .delete:
+                            // Map local sections to global before mappings update
+                            let globalSections = composition.globalSections(for: sections, in: dataSource)
+                            _numberOfSections = composition.updateMappings()
+                            return globalSections
+
+                        case .reload:
+                            // Map local sections to global without mappings update
+                            return composition.globalSections(for: sections, in: dataSource)
+
+                        case .move:
+                            // Map local sections to global without mappings update, mappings update must happen in newSections
+                            return composition.globalSections(for: sections, in: dataSource)
+                    }
+                }(),
+
+                newSections: {
+                    guard let newSections = sectionsUpdate.newElements else { return nil }
+                    _numberOfSections = composition.updateMappings()
+                    let globalNewSection = mapping.globalSections(for: newSections)
+
+                    return globalNewSection
+                }(),
+
+                animation: sectionsUpdate.animation
+            )
+            else {
+                return
+            }
+
+            notifyUpdate(globalUpdate)
             return
         }
-    
-        guard let structureUpdate = update as? TableViewStructureUpdate else {
-            notifyUpdate(update)
-            return
-        }
-    
-        let mapping = composition.mapping(for: dataSource)
-        
-        notifyUpdate(type(of: structureUpdate).init(type: structureUpdate.type, animation: structureUpdate.animation,
-            indexPaths: {
-                guard let indexPaths = structureUpdate.indexPaths else { return nil }
-                // Map local index paths to global
-                return mapping.globalIndexPaths(for: indexPaths)
-            }(),
-            newIndexPaths: {
-                guard let newIndexPaths = structureUpdate.newIndexPaths else { return nil }
-                // Map local index path to global
-                return mapping.globalIndexPaths(for: newIndexPaths)
-            }(),
-            sections: {
-                guard let sections = structureUpdate.sections else { return nil }
-                
-                switch structureUpdate.type {
-                    case .insert:
-                        _numberOfSections = composition.updateMappings()
-                        // Map local sections to global after mappings update
-                        return composition.globalSections(for: sections, in: dataSource)
-                    case .delete:
-                        // Map local sections to global before mappings update
-                        let globalSections = composition.globalSections(for: sections, in: dataSource)
-                        _numberOfSections = composition.updateMappings()
-                        return globalSections
-                    case .reload:
-                        // Map local sections to global without mappings update
-                        return composition.globalSections(for: sections, in: dataSource)
-                    case .move:
-                        // Map local sections to global without mappings update, mappings update must happen in newSections
-                        return composition.globalSections(for: sections, in: dataSource)
-                }
-            }(),
-            newSections: {
-                guard let newSections = structureUpdate.newSections else { return nil }
-                _numberOfSections = composition.updateMappings()
-                let globalNewSection = mapping.globalSections(for: newSections)
-                
-                return globalNewSection
-            }()
-        ))
+
+        _numberOfSections = composition.updateMappings()
+        notifyUpdate(update)
     }
     
     // MARK: - ContentLoadingObservable

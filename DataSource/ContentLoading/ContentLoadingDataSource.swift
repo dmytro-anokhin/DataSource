@@ -70,7 +70,7 @@ open class ContentLoadingDataSource : DataSource, ContentLoading, ContentLoading
         
         _contentLoadingController = nil
         
-        enqueueUpdate(.arbitraryUpdate(update))
+        enqueueUpdate(ArbitraryUpdate(update))
         performPendingUpdate()
         
         contentLoadingObserver?.didLoadContent(self, with: controller.loadingError)

@@ -60,13 +60,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F40C9C8C1D48A2BD00457C1E /* StaticCellsPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = StaticCellsPlayground.playground; sourceTree = "<group>"; };
 		F413BD581D5F060200779E84 /* ContentLoadingControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingControllerTests.swift; sourceTree = "<group>"; };
 		F422D9B71CB3111400576C5A /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		F422D9E51CB311BB00576C5A /* DataSource-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DataSource-Bridging-Header.h"; sourceTree = "<group>"; };
-		F440A1C31D4DEA3700534A3C /* SimpleExample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleExample.playground; sourceTree = "<group>"; };
-		F440A1C41D4DEEAC00534A3C /* SimpleContentLoadingExample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleContentLoadingExample.playground; sourceTree = "<group>"; };
-		F440A1C51D4E21E600534A3C /* SimpleCompositionExample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleCompositionExample.playground; sourceTree = "<group>"; };
 		F4467CFC1B63C6A400CDBA9C /* DataSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4467D011B63C6A400CDBA9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4467D061B63C6A400CDBA9C /* DataSourceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataSourceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +77,10 @@
 		F45530511D7D60D200DADBBC /* TableViewComposedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewComposedDataSource.swift; sourceTree = "<group>"; };
 		F45530521D7D60D200DADBBC /* TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
 		F45530531D7D60D200DADBBC /* TableViewDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceType.swift; sourceTree = "<group>"; };
+		F46053DC1D87E6220099736A /* SimpleCompositionExample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleCompositionExample.playground; sourceTree = "<group>"; };
+		F46053DD1D87E6220099736A /* SimpleContentLoadingExample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleContentLoadingExample.playground; sourceTree = "<group>"; };
+		F46053DE1D87E6220099736A /* SimpleExample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleExample.playground; sourceTree = "<group>"; };
+		F46053DF1D87E6220099736A /* StaticCellsPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = StaticCellsPlayground.playground; sourceTree = "<group>"; };
 		F47093621D46001D00BE7525 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F47093641D46001D00BE7525 /* Events.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Events.plist; sourceTree = "<group>"; };
 		F47093651D46001D00BE7525 /* Shops.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Shops.plist; sourceTree = "<group>"; };
@@ -95,11 +95,11 @@
 		F4A949EC1D58DA6D00D1F23B /* ContentLoadingStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingStateMachine.swift; sourceTree = "<group>"; };
 		F4A949EF1D58EB0D00D1F23B /* ContentLoadingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingCoordinator.swift; sourceTree = "<group>"; };
 		F4B416F61D3E1F67005E8BFC /* MemoryWarningHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWarningHandling.swift; sourceTree = "<group>"; };
+		F4C763021D92A17300A5E6E1 /* UpdatePlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = UpdatePlayground.playground; sourceTree = "<group>"; };
 		F4CD27681D49FC1B00C24E04 /* ContentLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoading.swift; sourceTree = "<group>"; };
 		F4CD277B1D4A000300C24E04 /* Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
 		F4CD277D1D4A005100C24E04 /* UpdateObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateObserver.swift; sourceTree = "<group>"; };
 		F4CD277F1D4A00F200C24E04 /* ContentLoadingObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingObserver.swift; sourceTree = "<group>"; };
-		F4CD27B61D4B4B9200C24E04 /* AmsterdamPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = AmsterdamPlayground.playground; sourceTree = "<group>"; };
 		F4E164EA1D53B20A00454A17 /* Composable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Composable.swift; sourceTree = "<group>"; };
 		F4F7D08A1D5D9CEF00513A8F /* ClosureContentLoadingObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureContentLoadingObserver.swift; sourceTree = "<group>"; };
 		F4F7D08B1D5D9CEF00513A8F /* ClosureUpdateObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureUpdateObserver.swift; sourceTree = "<group>"; };
@@ -132,11 +132,8 @@
 		F40C9C8B1D48A2A600457C1E /* Playgrounds */ = {
 			isa = PBXGroup;
 			children = (
-				F440A1C31D4DEA3700534A3C /* SimpleExample.playground */,
-				F440A1C41D4DEEAC00534A3C /* SimpleContentLoadingExample.playground */,
-				F440A1C51D4E21E600534A3C /* SimpleCompositionExample.playground */,
-				F40C9C8C1D48A2BD00457C1E /* StaticCellsPlayground.playground */,
-				F4CD27B61D4B4B9200C24E04 /* AmsterdamPlayground.playground */,
+				F46053DB1D87E6220099736A /* TableView */,
+				F4C763011D92A15D00A5E6E1 /* Various */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";
@@ -243,6 +240,17 @@
 			path = Proxy;
 			sourceTree = "<group>";
 		};
+		F46053DB1D87E6220099736A /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				F46053DC1D87E6220099736A /* SimpleCompositionExample.playground */,
+				F46053DD1D87E6220099736A /* SimpleContentLoadingExample.playground */,
+				F46053DE1D87E6220099736A /* SimpleExample.playground */,
+				F46053DF1D87E6220099736A /* StaticCellsPlayground.playground */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
 		F47093611D46001D00BE7525 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +309,14 @@
 				F4A949EC1D58DA6D00D1F23B /* ContentLoadingStateMachine.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		F4C763011D92A15D00A5E6E1 /* Various */ = {
+			isa = PBXGroup;
+			children = (
+				F4C763021D92A17300A5E6E1 /* UpdatePlayground.playground */,
+			);
+			path = Various;
 			sourceTree = "<group>";
 		};
 		F4CD27671D49FC1B00C24E04 /* ContentLoading */ = {

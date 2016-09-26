@@ -29,7 +29,7 @@ class TestObserver : UpdateObserver, ContentLoadingObserver {
         self.didLoadContentExpectation = didLoadContentExpectation
     }
 
-    func perform(update: Update, from sender: UpdateObservable) {
+    func perform(update: UpdateType, from sender: UpdateObservable) {
         update.perform(tableView)
         performUpdateExpectation?.fulfill()
     }

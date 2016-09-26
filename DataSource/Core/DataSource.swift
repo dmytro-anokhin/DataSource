@@ -29,16 +29,19 @@ open class DataSource : NSObject, UpdateObservable {
     }
     
     /// Postpones the update.
-    public final func enqueueUpdate(_ update: Update) {
-        
-        let batchUpdate = BatchUpdate()
-        
-        if let pendingUpdate = self.pendingUpdate {
-            batchUpdate.enqueueUpdate(pendingUpdate)
+    public final func enqueueUpdate(_ update: UpdateType) {
+
+        guard let pendingUpdate = pendingUpdate else {
+            self.pendingUpdate = update
+            return
         }
 
-        batchUpdate.enqueueUpdate(update)
-        self.pendingUpdate = batchUpdate
+        if let pendingBatchUpdate = pendingUpdate as? BatchUpdate {
+            self.pendingUpdate = BatchUpdate(updates: [update] + pendingBatchUpdate.updates)
+            return
+        }
+
+        self.pendingUpdate = BatchUpdate(updates: [update, pendingUpdate])
     }
     
     /// Notifies observer about pending update.
@@ -48,13 +51,13 @@ open class DataSource : NSObject, UpdateObservable {
         notifyUpdate(update)
     }
     
-    private var pendingUpdate: Update?
+    private var pendingUpdate: UpdateType?
 
     // MARK: - UpdateObservable
 
     public weak var updateObserver: UpdateObserver?
 
-    public final func notifyUpdate(_ update: Update) {
+    public final func notifyUpdate(_ update: UpdateType) {
 
         assertMainThread()
 

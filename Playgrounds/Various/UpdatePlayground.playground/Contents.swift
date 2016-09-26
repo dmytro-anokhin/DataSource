@@ -1,10 +1,11 @@
-//
-//  Update.swift
-//  DataSource
-//
-//  Created by Dmytro Anokhin on 04/04/16.
-//  Copyright © 2016 Dmytro Anokhin. All rights reserved.
-//
+//: Playground - noun: a place where people can play
+
+/*
+    Goal of this playground is to test out various architecture decisions for Update component
+*/
+
+import UIKit
+//import MapKit
 
 
 public protocol UpdateType {
@@ -60,9 +61,9 @@ extension UpdateAnimating where Self: TableViewRowAnimating {
 
 public struct ArbitraryUpdate : UpdateType {
 
-    private let closure: () -> Void
+    let closure: () -> Void
 
-    public init(_ closure: @escaping () -> Void) {
+    init(_ closure: @escaping () -> Void) {
         self.closure = closure
     }
 
@@ -74,9 +75,6 @@ public struct ArbitraryUpdate : UpdateType {
 
 public struct TableViewReloadDataUpdate : UpdateType {
 
-    public init() {
-    }
-
     public func perform(_ view: UIView) {
         (view as? UITableView)?.reloadData()
     }
@@ -85,60 +83,9 @@ public struct TableViewReloadDataUpdate : UpdateType {
 
 public struct TableViewRowsUpdate : StructureUpdateType, TableViewRowAnimating {
 
-    public init(insert rows: Elements, with animation: UITableViewRowAnimation = .none) {
-        self.changeType = .insert
-        self.elements = nil
-        self.newElements = rows
-        self.animation = animation
-    }
-
-    public init(delete rows: Elements, with animation: UITableViewRowAnimation = .none) {
-        self.changeType = .delete
-        self.elements = rows
-        self.newElements = nil
-        self.animation = animation
-    }
-
-    public init(reload rows: Elements, with animation: UITableViewRowAnimation = .none) {
-        self.changeType = .reload
-        self.elements = rows
-        self.newElements = nil
-        self.animation = animation
-    }
-
-    public init(move rows: Elements, to newRows: Elements) {
-        self.changeType = .move
-        self.elements = rows
-        self.newElements = newRows
-        self.animation = .none
-    }
-
-    public init?(changeType: StructureChangeType, indexPaths: Elements? = nil, newIndexPaths: Elements? = nil,
+    init(changeType: StructureChangeType, indexPaths: Elements? = nil, newIndexPaths: Elements? = nil,
         animation: UITableViewRowAnimation = .none)
     {
-        switch changeType {
-            case .insert:
-                if nil == newIndexPaths {
-                    assertionFailure("Incorrect insert rows update")
-                    return nil
-                }
-            case .delete:
-                if nil == indexPaths {
-                    assertionFailure("Incorrect delete rows update")
-                    return nil
-                }
-            case .reload:
-                if nil == indexPaths {
-                    assertionFailure("Incorrect reload rows update")
-                    return nil
-                }
-            case .move:
-                if nil == indexPaths || nil == newIndexPaths {
-                    assertionFailure("Incorrect move rows update")
-                    return nil
-                }
-        }
-
         self.changeType = changeType
         self.elements = indexPaths
         self.newElements = newIndexPaths
@@ -189,60 +136,9 @@ public struct TableViewRowsUpdate : StructureUpdateType, TableViewRowAnimating {
 
 public struct TableViewSectionsUpdate : StructureUpdateType, TableViewRowAnimating {
 
-    public init(insert sections: Elements, with animation: UITableViewRowAnimation = .none) {
-        self.changeType = .insert
-        self.elements = nil
-        self.newElements = sections
-        self.animation = animation
-    }
-
-    public init(delete sections: Elements, with animation: UITableViewRowAnimation = .none) {
-        self.changeType = .delete
-        self.elements = sections
-        self.newElements = nil
-        self.animation = animation
-    }
-
-    public init(reload sections: Elements, with animation: UITableViewRowAnimation = .none) {
-        self.changeType = .reload
-        self.elements = sections
-        self.newElements = nil
-        self.animation = animation
-    }
-
-    public init(move sections: Elements, to newSections: Elements) {
-        self.changeType = .move
-        self.elements = sections
-        self.newElements = newSections
-        self.animation = .none
-    }
-
-    public init?(changeType: StructureChangeType, sections: Elements? = nil, newSections: Elements? = nil,
+    init(changeType: StructureChangeType, sections: IndexSet? = nil, newSections: Elements? = nil,
         animation: UITableViewRowAnimation = .none)
     {
-        switch changeType {
-            case .insert:
-                if nil == newSections {
-                    assertionFailure("Incorrect insert sections update")
-                    return nil
-                }
-            case .delete:
-                if nil == sections {
-                    assertionFailure("Incorrect delete sections update")
-                    return nil
-                }
-            case .reload:
-                if nil == sections {
-                    assertionFailure("Incorrect reload sections update")
-                    return nil
-                }
-            case .move:
-                if nil == sections || nil == newSections {
-                    assertionFailure("Incorrect move sections update")
-                    return nil
-                }
-        }
-
         self.changeType = changeType
         self.elements = sections
         self.newElements = newSections
@@ -334,3 +230,45 @@ public struct BatchUpdate : UpdateType, UpdateAnimating {
         return false
     }
 }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func performUpdate(_ update: UpdateType) {
+    print(update)
+}
+
+
+let insert = TableViewRowsUpdate(changeType: .insert, indexPaths: [IndexPath(row: 0, section: 0)])
+let delete = TableViewRowsUpdate(changeType: .delete, indexPaths: [IndexPath(row: 1, section: 0)])
+
+let batch = BatchUpdate(updates: [ insert, delete ])
+performUpdate(batch)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

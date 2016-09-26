@@ -6,4 +6,4 @@
 //
 
 
-#import "DTSRTableViewProxy.h"
+#import "TableView/Composition/Proxy/DTSRTableViewProxy.h"

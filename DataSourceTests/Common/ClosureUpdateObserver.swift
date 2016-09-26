@@ -12,13 +12,13 @@
 /// The `ClosureUpdateObserver` encapsulates `UpdateObserver` callback in a closure.
 class ClosureUpdateObserver : UpdateObserver {
 
-    var perform: ((Update, UpdateObservable) -> Void)?
+    var perform: ((UpdateType, UpdateObservable) -> Void)?
     
-    init(_ perform: ((Update, UpdateObservable) -> Void)?) {
+    init(_ perform: ((UpdateType, UpdateObservable) -> Void)?) {
         self.perform = perform
     }
 
-    func perform(update: Update, from sender: UpdateObservable) {
+    func perform(update: UpdateType, from sender: UpdateObservable) {
         perform?(update, sender)
     }
 }

@@ -58,7 +58,7 @@ public final class ContentLoadingCoordinator {
     
     typealias CompletionHandler = (_ state: ContentLoadingState?, _ error: NSError?, _ update: Update?) -> Void
     
-    init(completion: CompletionHandler) {
+    init(completion: @escaping CompletionHandler) {
         self.completion = completion
     }
     
