@@ -93,7 +93,7 @@ class ContentLoadingControllerTests: XCTestCase {
         waitForExpectations(timeout: 0.1) { error in
             let _ = delegate // Keep strong reference
             XCTAssertEqual(controller.loadingState, .error)
-            XCTAssertEqual(controller.loadingError, loadingError)
+            XCTAssertEqual(controller.loadingError as? NSError, loadingError)
         }
     }
 

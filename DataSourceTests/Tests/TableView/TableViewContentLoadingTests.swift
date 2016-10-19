@@ -207,7 +207,7 @@ class TableViewContentLoadingTests : XCTestCase {
             
             // Verify error
             let testError = self.makeError()
-            XCTAssertEqual(dataSource.loadingError, testError)
+            XCTAssertEqual(dataSource.loadingError as? NSError, testError)
         }
     }
     
@@ -257,7 +257,7 @@ class TableViewContentLoadingTests : XCTestCase {
             
             // Verify error
             let testError = self.makeError()
-            XCTAssertEqual(dataSource1.loadingError, testError)
+            XCTAssertEqual(dataSource1.loadingError as? NSError, testError)
         }
     }
     

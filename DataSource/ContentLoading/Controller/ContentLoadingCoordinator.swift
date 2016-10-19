@@ -24,7 +24,7 @@ public final class ContentLoadingCoordinator {
     }
     
     /// Signals that loading failed with an error. This triggers a transition to the `.error` state.
-    public func done(withError error: NSError) {
+    public func done(withError error: Error) {
         done(withState: .error, error: error, update: nil)
     }
 
@@ -56,7 +56,7 @@ public final class ContentLoadingCoordinator {
     
     // MARK: - Internal
     
-    typealias CompletionHandler = (_ state: ContentLoadingState?, _ error: NSError?, _ update: Update?) -> Void
+    typealias CompletionHandler = (_ state: ContentLoadingState?, _ error: Error?, _ update: Update?) -> Void
     
     init(completion: @escaping CompletionHandler) {
         self.completion = completion
@@ -70,7 +70,7 @@ public final class ContentLoadingCoordinator {
     private let queue = DispatchQueue(label: "DataSource.ContentLoadingCoordinator.synchronizationQueue",
         attributes: .concurrent)
 
-    private func done(withState state: ContentLoadingState?, error: NSError?, update: Update?) {
+    private func done(withState state: ContentLoadingState?, error: Error?, update: Update?) {
         queue.async(flags: .barrier) {
             guard let completion = self.completion else { return }
             self.completion = nil

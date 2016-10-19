@@ -31,7 +31,7 @@ public final class ContentLoadingController {
         return .initial
     }
 
-    public private(set) var loadingError: NSError?
+    public private(set) var loadingError: Error?
     
     /** The `loadContent(_:)` is a principal content loading method.
     
@@ -83,7 +83,7 @@ public final class ContentLoadingController {
         delegate?.contentLoadingControllerWillBeginLoading(self)
     }
     
-    private func endLoading(_ state: ContentLoadingState, error: NSError?, update: @escaping () -> Void) {
+    private func endLoading(_ state: ContentLoadingState, error: Error?, update: @escaping () -> Void) {
         
         assertMainThread()
 

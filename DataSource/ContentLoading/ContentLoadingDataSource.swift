@@ -48,9 +48,9 @@ open class ContentLoadingDataSource : DataSource, ContentLoading, ContentLoading
         return contentLoadingController.loadingState
     }
     
-    private var _loadingError: NSError?
+    private var _loadingError: Error?
     
-    public var loadingError: NSError? {
+    public var loadingError: Error? {
         return _loadingError
     }
     

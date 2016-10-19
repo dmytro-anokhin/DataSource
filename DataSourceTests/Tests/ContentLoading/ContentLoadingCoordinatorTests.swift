@@ -35,7 +35,7 @@ class ContentLoadingCoordinatorTests: XCTestCase {
         
         let coordinator = ContentLoadingCoordinator { (state, error, update) in
             XCTAssertEqual(state, .error)
-            XCTAssertEqual(loadingError, error)
+            XCTAssertEqual(loadingError, error as? NSError)
             errorExpectation.fulfill()
         }
         

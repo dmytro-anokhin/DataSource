@@ -95,7 +95,6 @@
 		F4A949EC1D58DA6D00D1F23B /* ContentLoadingStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingStateMachine.swift; sourceTree = "<group>"; };
 		F4A949EF1D58EB0D00D1F23B /* ContentLoadingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoadingCoordinator.swift; sourceTree = "<group>"; };
 		F4B416F61D3E1F67005E8BFC /* MemoryWarningHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWarningHandling.swift; sourceTree = "<group>"; };
-		F4C763021D92A17300A5E6E1 /* UpdatePlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = UpdatePlayground.playground; sourceTree = "<group>"; };
 		F4CD27681D49FC1B00C24E04 /* ContentLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoading.swift; sourceTree = "<group>"; };
 		F4CD277B1D4A000300C24E04 /* Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
 		F4CD277D1D4A005100C24E04 /* UpdateObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateObserver.swift; sourceTree = "<group>"; };
@@ -133,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				F46053DB1D87E6220099736A /* TableView */,
-				F4C763011D92A15D00A5E6E1 /* Various */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";
@@ -309,14 +307,6 @@
 				F4A949EC1D58DA6D00D1F23B /* ContentLoadingStateMachine.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		F4C763011D92A15D00A5E6E1 /* Various */ = {
-			isa = PBXGroup;
-			children = (
-				F4C763021D92A17300A5E6E1 /* UpdatePlayground.playground */,
-			);
-			path = Various;
 			sourceTree = "<group>";
 		};
 		F4CD27671D49FC1B00C24E04 /* ContentLoading */ = {

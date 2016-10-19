@@ -13,10 +13,10 @@
 class ClosureContentLoadingObserver : ContentLoadingObserver {
 
     var willLoadContent: ((_ sender: ContentLoadingObservable) -> Void)?
-    var didLoadContent: ((_ sender: ContentLoadingObservable, _ error: NSError?) -> Void)?
+    var didLoadContent: ((_ sender: ContentLoadingObservable, _ error: Error?) -> Void)?
     
     init(willLoadContent: ((_ sender: ContentLoadingObservable) -> Void)? = nil,
-        didLoadContent: ((_ sender: ContentLoadingObservable, _ error: NSError?) -> Void)? = nil)
+        didLoadContent: ((_ sender: ContentLoadingObservable, _ error: Error?) -> Void)? = nil)
     {
         self.willLoadContent = willLoadContent
         self.didLoadContent = didLoadContent
@@ -26,7 +26,7 @@ class ClosureContentLoadingObserver : ContentLoadingObserver {
         willLoadContent?(sender)
     }
     
-    func didLoadContent(_ sender: ContentLoadingObservable, with error: NSError?) {
+    func didLoadContent(_ sender: ContentLoadingObservable, with error: Error?) {
         didLoadContent?(sender, error)
     }
 }

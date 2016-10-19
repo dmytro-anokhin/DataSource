@@ -27,7 +27,7 @@ class ExpectationContentLoadingObserver : ContentLoadingObserver {
         willLoadContentExpectation?.fulfill()
     }
     
-    func didLoadContent(_ sender: ContentLoadingObservable, with error: NSError?) {
+    func didLoadContent(_ sender: ContentLoadingObservable, with error: Error?) {
         didLoadContentExpectation?.fulfill()
     }
 }

@@ -95,7 +95,7 @@ open class TableViewComposedDataSource : DataSource, Composable, TableViewDataSo
     
     // MARK: - ContentLoading
 
-    public var loadingError: NSError? { return nil }
+    public var loadingError: Error? { return nil }
 
     // MARK: - UpdateObserver
     
@@ -198,7 +198,7 @@ open class TableViewComposedDataSource : DataSource, Composable, TableViewDataSo
     public func willLoadContent(_ sender: ContentLoadingObservable) {
     }
 
-    public func didLoadContent(_ sender: ContentLoadingObservable, with error: NSError?) {
+    public func didLoadContent(_ sender: ContentLoadingObservable, with error: Error?) {
         
         assertMainThread()
 

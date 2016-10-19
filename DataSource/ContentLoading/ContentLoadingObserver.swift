@@ -17,5 +17,5 @@ public protocol ContentLoadingObserver : class {
 
     func willLoadContent(_ sender: ContentLoadingObservable)
     
-    func didLoadContent(_ sender: ContentLoadingObservable, with error: NSError?)
+    func didLoadContent(_ sender: ContentLoadingObservable, with error: Error?)
 }
