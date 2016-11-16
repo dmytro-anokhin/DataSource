@@ -25,7 +25,7 @@ open class TableViewDataSource : ContentLoadingDataSource, TableViewDataSourceTy
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         fatalError("Not implemented")
     }
-    
+
     // optional
     
     open func numberOfSections(in tableView: UITableView) -> Int {

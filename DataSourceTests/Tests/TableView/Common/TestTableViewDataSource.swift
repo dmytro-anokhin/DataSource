@@ -2,41 +2,83 @@
 //  TestTableViewDataSource.swift
 //  DataSource
 //
-//  Created by Dmytro Anokhin on 06/08/16.
+//  Created by Dmytro Anokhin on 16/11/16.
 //  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
-@testable import DataSource
+import DataSource
 
 
-/// The TestTableViewDataSource is a data source that provides basic features for test purposes.
-class TestTableViewDataSource : TableViewDataSource, TableViewReusableViewsRegistering {
+class TestTableViewDataSource: NSObject, TableViewDataSourceType, UITableViewDelegate {
 
-    let cellReuseIdentifier = NSStringFromClass(UITableViewCell.self)
+    typealias NumberOfRows = Int
 
-    /// The sections is an array of numbers representing number of rows per section
-    var sections: [Int]
-    
-    required init(sections: [Int]) {
-        self.sections = sections
+    /// Array of sections represented by number of rows
+    var sections: [NumberOfRows] = []
+
+    var numberOfSections: Int {
+        get {
+            return sections.count
+        }
+
+        set {
+            var sections: [Int] = []
+            for _ in 0..<newValue {
+                sections.append(0)
+            }
+
+            self.sections = sections
+        }
     }
 
-    override var numberOfSections: Int {
-        return sections.count
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return numberOfSections
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section]
     }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
-        cell.textLabel?.text = "(\(indexPath.section), \(indexPath.row))"
-        
-        return cell
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let reuseIdentifier = "TestTableViewDataSourceCell"
+
+        var cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
+
+        if nil == cell {
+            cell = UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
+        }
+
+        return cell!
     }
-    
-    func registerReusableViews(with tableView: UITableView) {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let reuseIdentifier = "TestTableViewDataSourceHeader"
+
+        var view = tableView.dequeueReusableHeaderFooterView(withIdentifier: reuseIdentifier)
+
+        if nil == view {
+            view = UITableViewHeaderFooterView(reuseIdentifier: reuseIdentifier)
+        }
+
+        view?.tag = section
+
+        return view
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+
+        let reuseIdentifier = "TestTableViewDataSourceFooter"
+
+        var view = tableView.dequeueReusableHeaderFooterView(withIdentifier: reuseIdentifier)
+
+        if nil == view {
+            view = UITableViewHeaderFooterView(reuseIdentifier: reuseIdentifier)
+        }
+
+        view?.tag = section
+
+        return view
     }
 }

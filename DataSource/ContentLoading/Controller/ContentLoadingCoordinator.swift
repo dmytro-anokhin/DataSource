@@ -30,7 +30,7 @@ public final class ContentLoadingCoordinator {
 
     /// Signals that loading is complete, transitions into the `.loaded` state and then runs the update block.
     public func done(withUpdate update: Update? = nil) {
-        done(withState: .contentLoaded, error: nil, update: update)
+        done(withState: .loaded, error: nil, update: update)
     }
     
     private var _current = true
@@ -75,7 +75,7 @@ public final class ContentLoadingCoordinator {
             guard let completion = self.completion else { return }
             self.completion = nil
             
-            DispatchQueue.main.async { () -> Void in
+            DispatchQueue.main.async { _ in
                 completion(state, error, update)
             }
         }

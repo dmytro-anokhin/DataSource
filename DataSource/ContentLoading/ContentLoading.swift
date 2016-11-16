@@ -13,20 +13,20 @@ public enum ContentLoadingState {
     case initial
     
     /// Loading content
-    case loadingContent
+    case loading
 
     /// Content is loaded successfully
-    case contentLoaded
+    case loaded
     
     /// An error occurred while loading content
     case error
     
     public var isLoaded: Bool {
-        return self == .contentLoaded || self == .error
+        return self == .loaded || self == .error
     }
     
     public var isLoading: Bool {
-        return self == .loadingContent
+        return self == .loading
     }
 }
 
@@ -45,7 +45,7 @@ public protocol ContentLoading : ContentLoadingObservable {
 }
 
 
-public extension ContentLoading where Self: Composable {
+public extension ContentLoading where Self: Composition {
     
     var loadingState: ContentLoadingState {
     
@@ -53,21 +53,21 @@ public extension ContentLoading where Self: Composable {
         // Initial state has a value of 1 and used to return from the loop.
         var numberOf: [ContentLoadingState : UInt] = [
                 .initial : 1,
-                .loadingContent : 0,
-                .contentLoaded : 0,
+                .loading : 0,
+                .loaded : 0,
                 .error : 0
             ]
 
         // Calculating number of content loading data sources per loading state.
-        for dataSource in children {
-            guard let loadingState = (dataSource as? ContentLoading)?.loadingState else { continue }
+        for child in children {
+            guard let loadingState = (child as? ContentLoading)?.loadingState else { continue }
             numberOf[loadingState]! += 1
         }
         
         // Aggregate loading states by selecting one with highest priority in which there are at least one data source.
         
         let loadingStateByPriority: [ContentLoadingState] = [
-            .loadingContent, .error, .contentLoaded, .initial
+            .loading, .error, .loaded, .initial
         ]
         
         for loadingState in loadingStateByPriority {
@@ -84,11 +84,11 @@ public extension ContentLoading where Self: Composable {
         
         assertMainThread()
     
-        for dataSource in children {
-            (dataSource as? ContentLoading)?.loadContent()
+        for child in children {
+            (child as? ContentLoading)?.loadContent()
         }
         
-        if loadingState == .loadingContent {
+        if loadingState == .loading {
             contentLoadingObserver?.willLoadContent(self)
         }
     }

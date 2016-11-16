@@ -20,20 +20,20 @@ public final class ContentLoadingStateMachine {
     public let transitions: [ContentLoadingState : [ContentLoadingState]] = [
 
         .initial : [
-            .loadingContent
+            .loading
         ],
         
-        .loadingContent : [
-            .contentLoaded,
+        .loading : [
+            .loaded,
             .error
         ],
 
-        .contentLoaded : [
-            .loadingContent
+        .loaded : [
+            .loading
         ],
         
         .error : [
-            .loadingContent
+            .loading
         ]
     ]
 

@@ -79,7 +79,7 @@ public final class ContentLoadingController {
     }
     
     private func beginLoading() {
-        updateLoadingState(.loadingContent)
+        updateLoadingState(.loading)
         delegate?.contentLoadingControllerWillBeginLoading(self)
     }
     

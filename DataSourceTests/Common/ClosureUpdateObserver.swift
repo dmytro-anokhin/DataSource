@@ -2,23 +2,24 @@
 //  ClosureUpdateObserver.swift
 //  DataSource
 //
-//  Created by Dmytro Anokhin on 06/08/16.
+//  Created by Dmytro Anokhin on 02/11/16.
 //  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
-@testable import DataSource
+import DataSource
 
 
-/// The `ClosureUpdateObserver` encapsulates `UpdateObserver` callback in a closure.
-class ClosureUpdateObserver : UpdateObserver {
+class ClosureUpdateObserver: UpdateObserver {
 
-    var perform: ((UpdateType, UpdateObservable) -> Void)?
-    
-    init(_ perform: ((UpdateType, UpdateObservable) -> Void)?) {
+    typealias PerformClosure = ((UpdateType, UpdateObservable) -> Void)
+
+    var perform: PerformClosure?
+
+    init(perform: PerformClosure? = nil) {
         self.perform = perform
     }
 
-    func perform(update: UpdateType, from sender: UpdateObservable) {
+    public func perform(update: UpdateType, from sender: UpdateObservable) {
         perform?(update, sender)
     }
 }

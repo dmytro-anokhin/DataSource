@@ -8,9 +8,9 @@
 
 
 /// The `TableViewDataSourceComposition` implements the composition of a table view data source objects.
-class TableViewDataSourceComposition : Composable {
+class TableViewDataSourceComposition : Composition {
     
-    // MARK: - Composable
+    // MARK: - Composition
     
     typealias Child = TableViewDataSourceType
     
@@ -90,10 +90,10 @@ class TableViewDataSourceComposition : Composable {
         return sections as IndexSet
     }
     
-    func section(for dataSource: Child) -> Int? {
+    func firstSection(for dataSource: Child) -> Int? {
         return mapping(for: dataSource).globalSection(for: 0)
     }
-    
+
     func localIndexPath(for globalIndexPath: IndexPath) -> IndexPath? {
         return mapping(for: globalIndexPath.section)?.localIndexPath(for: globalIndexPath)
     }

@@ -6,11 +6,11 @@
 //
 
 
-open class TableViewComposedDataSource : DataSource, Composable, TableViewDataSourceType,
+open class TableViewComposedDataSource : DataSource, Composition, TableViewDataSourceType,
     IndexPathIndexable, TableViewReusableViewsRegistering, ContentLoading,
     UpdateObserver, ContentLoadingObserver, ContentLoadingObservable {
     
-    // MARK: - Composable
+    // MARK: - Composition
 
     public typealias Child = TableViewDataSourceType
 

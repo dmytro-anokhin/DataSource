@@ -43,13 +43,13 @@ public protocol UpdateAnimating {
 }
 
 
-public protocol TableViewRowAnimating {
+public protocol TableViewRowAnimating : UpdateAnimating {
 
     var animation: UITableViewRowAnimation { get }
 }
 
 
-extension UpdateAnimating where Self: TableViewRowAnimating {
+extension TableViewRowAnimating {
 
     public var animated: Bool { return animation != .none }
 }

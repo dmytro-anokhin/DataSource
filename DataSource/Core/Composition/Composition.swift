@@ -1,5 +1,5 @@
 //
-//  Composable.swift
+//  Composition.swift
 //  DataSource
 //
 //  Created by Dmytro Anokhin on 04/08/16.
@@ -7,8 +7,8 @@
 //
 
 
-/// The Composable protocol defines interface for objects that may be combined together.
-public protocol Composable {
+/// The Composition protocol defines interface for objects that may be combined together.
+public protocol Composition {
 
     associatedtype Child
 

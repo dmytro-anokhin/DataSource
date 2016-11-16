@@ -2,25 +2,28 @@
 //  ClosureContentLoadingObserver.swift
 //  DataSource
 //
-//  Created by Dmytro Anokhin on 09/08/16.
+//  Created by Dmytro Anokhin on 20/10/16.
 //  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 
-@testable import DataSource
+import DataSource
 
 
-/// The `ClosureContentLoadingObserver` encapsulates `ContentLoadingObserver` callbacks in closures.
-class ClosureContentLoadingObserver : ContentLoadingObserver {
+class ClosureContentLoadingObserver: ContentLoadingObserver {
 
-    var willLoadContent: ((_ sender: ContentLoadingObservable) -> Void)?
-    var didLoadContent: ((_ sender: ContentLoadingObservable, _ error: Error?) -> Void)?
-    
-    init(willLoadContent: ((_ sender: ContentLoadingObservable) -> Void)? = nil,
-        didLoadContent: ((_ sender: ContentLoadingObservable, _ error: Error?) -> Void)? = nil)
+    typealias WillLoadContentClosure = ((ContentLoadingObservable) -> Void)
+    typealias DidLoadContentClosure = ((ContentLoadingObservable, Error?) -> Void)
+
+    var willLoadContent: WillLoadContentClosure?
+    var didLoadContent: DidLoadContentClosure?
+
+    init(willLoadContent: WillLoadContentClosure? = nil,
+        didLoadContent: DidLoadContentClosure? = nil)
     {
         self.willLoadContent = willLoadContent
         self.didLoadContent = didLoadContent
     }
+
 
     func willLoadContent(_ sender: ContentLoadingObservable) {
         willLoadContent?(sender)

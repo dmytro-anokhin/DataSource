@@ -2,7 +2,7 @@
 //  ContentLoadingStateMachineTests.swift
 //  DataSource
 //
-//  Created by Dmytro Anokhin on 25/07/16.
+//  Created by Dmytro Anokhin on 19/10/16.
 //  Copyright © 2016 Dmytro Anokhin. All rights reserved.
 //
 

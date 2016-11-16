@@ -31,15 +31,15 @@ final class TableViewSectionMapping {
     /// Return a set of local sections from a set of global sections
     func localSections(for globalSections: IndexSet) -> IndexSet {
     
-        let localSections = NSMutableIndexSet()
+        var localSections = IndexSet()
 
         for globalSection in globalSections {
             if let localSection = localSection(for: globalSection) {
-                localSections.add(localSection)
+                localSections.insert(localSection)
             }
         }
     
-        return localSections as IndexSet
+        return localSections
     }
     
     /// Return the global section for a local section
@@ -56,15 +56,15 @@ final class TableViewSectionMapping {
     /// Return a set of global sections from a set of local sections
     func globalSections(for localSections: IndexSet) -> IndexSet {
     
-        let globalSections = NSMutableIndexSet()
+        var globalSections = IndexSet()
         
         for localSection in localSections {
             if let globalSection = globalSection(for: localSection) {
-                globalSections.add(globalSection)
+                globalSections.insert(globalSection)
             }
         }
 
-        return globalSections as IndexSet
+        return globalSections
     }
 
     /// Return a local index path for a global index path
@@ -123,6 +123,16 @@ final class TableViewSectionMapping {
         localToGlobalSections[localSection] = globalSection
     }
 
-    private var globalToLocalSections: [Int:Int] = [:]
-    private var localToGlobalSections: [Int:Int] = [:]
+    fileprivate var globalToLocalSections: [Int:Int] = [:]
+    fileprivate var localToGlobalSections: [Int:Int] = [:]
+}
+
+
+extension TableViewSectionMapping: Equatable {
+
+    static func ==(lhs: TableViewSectionMapping, rhs: TableViewSectionMapping) -> Bool {
+        return lhs.dataSource.isEqual(rhs.dataSource)
+            && lhs.globalToLocalSections == rhs.globalToLocalSections
+            && lhs.localToGlobalSections == rhs.localToGlobalSections
+    }
 }
